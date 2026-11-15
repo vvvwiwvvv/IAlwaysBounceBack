@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://shaders/orbit_particles.gdshader" id="1_1j1k7"]
+
+[resource]
+shader = ExtResource("1_1j1k7")
+shader_parameter/radius_min = 0.4
+shader_parameter/radius_max = 0.72
+shader_parameter/orbit_speed = 2.0
+shader_parameter/inward_pull = 0.0
+shader_parameter/wobble = 0.25
+shader_parameter/size_min = 0.85
+shader_parameter/size_max = 1.5
+shader_parameter/spin = 0.9
+shader_parameter/brightness = 1.0
+shader_parameter/tint = Color(1, 1, 1, 1)

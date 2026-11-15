@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://c0v2cejk3tyrh"]
+
+[ext_resource type="Script" uid="uid://dng44q0qx8o0n" path="res://scripts/menu.gd" id="1_v86rl"]
+[ext_resource type="Texture2D" uid="uid://c7npnrm3m22ey" path="res://ui/menuButton.png" id="2_13sgg"]
+[ext_resource type="Texture2D" uid="uid://ckw5wdy8ah758" path="res://ui/menuButtonPressed.png" id="2_g3eks"]
+[ext_resource type="Texture2D" uid="uid://c8sd21oa70nmy" path="res://ui/icon.png" id="2_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://bxtitbg0dv4v1" path="res://ui/title.png" id="3_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://dl7tc5ib0ygj1" path="res://ui/menuButtonHover.png" id="3_v86rl"]
+[ext_resource type="Texture2D" uid="uid://dbpcijbmruujj" path="res://ui/backdrop.png" id="4_mhnvy"]
+[ext_resource type="FontFile" uid="uid://dc0q4wb3hfdey" path="res://PixelPurl.ttf" id="5_i6lef"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wq7lk"]
+font = ExtResource("5_i6lef")
+font_size = 64
+font_color = Color(0.37, 0.3626, 0.3626, 1)
+shadow_size = 12
+
+[node name="Control" type="Control" unique_id=1164773412]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v86rl")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1178371932]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 135.0
+offset_top = 133.0
+offset_right = 522.0
+offset_bottom = 300.0
+texture_normal = ExtResource("2_13sgg")
+texture_pressed = ExtResource("2_g3eks")
+texture_hover = ExtResource("3_v86rl")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton" unique_id=836350951]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.30200002
+anchor_bottom = 0.37100002
+offset_left = 125.0
+offset_top = 55.0
+offset_right = 148.12599
+offset_bottom = 106.043
+text = "START"
+label_settings = SubResource("LabelSettings_wq7lk")
+
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=1494485521]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 39.0
+offset_top = 301.0
+offset_right = 426.0
+offset_bottom = 468.0
+texture_normal = ExtResource("2_13sgg")
+texture_pressed = ExtResource("2_g3eks")
+texture_hover = ExtResource("3_v86rl")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton2" unique_id=134784510]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.30200002
+anchor_bottom = 0.37100002
+offset_left = 140.0
+offset_top = 56.0
+offset_right = 163.12599
+offset_bottom = 107.04303
+text = "QUIT"
+label_settings = SubResource("LabelSettings_wq7lk")
+
+[node name="TextureButton3" type="TextureButton" parent="." unique_id=1545431967]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 131.0
+offset_top = 467.0
+offset_right = 518.0
+offset_bottom = 634.0
+texture_normal = ExtResource("2_13sgg")
+texture_pressed = ExtResource("3_v86rl")
+texture_hover = ExtResource("2_g3eks")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton3" unique_id=1492735620]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.30200002
+anchor_bottom = 0.37100002
+offset_left = 114.0
+offset_top = 59.0
+offset_right = 173.12599
+offset_bottom = 110.043
+text = "CREDITS"
+label_settings = SubResource("LabelSettings_wq7lk")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2110225116]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 591.0
+offset_top = 155.0
+offset_right = 1054.0
+offset_bottom = 602.0
+texture = ExtResource("2_mhnvy")
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1607309079]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 110.0
+offset_top = 7.0
+offset_right = 1078.0
+offset_bottom = 128.0
+texture = ExtResource("3_4ytvr")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1595639297]
+texture_filter = 1
+layout_mode = 0
+offset_left = -5.0
+offset_top = -185.0
+offset_right = 1279.0
+offset_bottom = 970.0
+mouse_filter = 2
+texture = ExtResource("4_mhnvy")
+stretch_mode = 4
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="TextureButton3" to="." method="_on_texture_button_3_pressed"]

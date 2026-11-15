@@ -1,0 +1,22 @@
+[gd_resource type="QuadMesh" format=3 uid="uid://js1svkbo1t8q"]
+
+[ext_resource type="Texture2D" uid="uid://btfgtxcyq83ws" path="res://particles/PNG (Transparent)/flame_03.png" id="1_2jje5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37ll0"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1.6, 1.6, 1.75, 0.5)
+albedo_texture = ExtResource("1_2jje5")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.35
+
+[resource]
+material = SubResource("StandardMaterial3D_37ll0")

@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/terrain.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="4"]
 [ext_resource type="Material" uid="uid://drbyxm3itr1yd" path="res://resources/water_material.tres" id="5"]
-[ext_resource type="QuadMesh" uid="uid://dfpppgbsx8yg3" path="res://resources/motes_mesh.tres" id="6"]
-[ext_resource type="Material" uid="uid://cktp2qre5gfnf" path="res://resources/motes_process.tres" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/game.tscn" id="6"]
 
 [sub_resource type="PlaneMesh" id="water_plane"]
 size = Vector2(6000, 6000)
@@ -33,19 +32,12 @@ material_override = ExtResource("5")
 cast_shadow = 0
 mesh = SubResource("water_plane")
 
-[node name="Motes" type="GPUParticles3D" parent="." unique_id=1851664557]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 10)
-amount = 140
-lifetime = 9.0
-preprocess = 9.0
-visibility_aabb = AABB(-30, -10, -30, 60, 30, 60)
-process_material = ExtResource("7")
-draw_pass_1 = ExtResource("6")
-
 [node name="PlayerSpawn" type="Marker3D" parent="." unique_id=1410846601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.2, 14.9)
 
 [node name="Player" parent="." unique_id=256630768 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.2, 14.9)
+
+[node name="Game" parent="." unique_id=2028635505 instance=ExtResource("6")]
 
 [editable path="Player"]

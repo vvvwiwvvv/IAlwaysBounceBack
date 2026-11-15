@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Material" path="res://resources/spirit/transform_fog_process.tres" id="1"]
+[ext_resource type="Mesh" path="res://resources/spirit/transform_fog_mesh.tres" id="2"]
+[ext_resource type="Script" path="res://scripts/fx_once.gd" id="3"]
+
+[node name="DeathFog" type="GPUParticles3D"]
+emitting = false
+amount = 16
+lifetime = 1.0
+one_shot = true
+explosiveness = 0.9
+visibility_aabb = AABB(-6, -6, -6, 12, 12, 12)
+process_material = ExtResource("1")
+draw_pass_1 = ExtResource("2")
+script = ExtResource("3")

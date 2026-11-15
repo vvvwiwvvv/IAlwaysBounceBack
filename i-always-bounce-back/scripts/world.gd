@@ -1,3 +1,7 @@
+# CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
+# 3D MODELS: SKETCHFAB
+# BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
+
 extends Node3D
 
 @export var day_length := 420.0
@@ -39,6 +43,8 @@ func _process(delta: float) -> void:
 
 
 func _respawn() -> void:
+	if player.has_method("cancel_ability"):
+		player.cancel_ability()
 	player.global_position = spawn.global_position
 	player.velocity = Vector3.ZERO
 

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1"]
+[ext_resource type="PackedScene" path="res://enemies/bat/bat_model.glb" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/death_fog.tscn" id="3"]
+
+[sub_resource type="SphereShape3D" id="shape"]
+radius = 0.5
+
+[node name="Bat" type="CharacterBody3D"]
+script = ExtResource("1")
+kind = 2
+max_health = 10.0
+move_speed = 4.6
+acceleration = 3.0
+damage = 8.0
+attack_range = 1.5
+attack_cooldown = 1.2
+points = 6
+flying = true
+hover_height = 2.6
+dive_distance = 7.0
+despawn_delay = 0.3
+fog_scene = ExtResource("3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("shape")
+
+[node name="Model" parent="." instance=ExtResource("2")]

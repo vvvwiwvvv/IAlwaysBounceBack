@@ -1,0 +1,117 @@
+[gd_scene load_steps=23 format=3]
+
+[ext_resource type="Script" path="res://scripts/spirit_ball.gd" id="1"]
+[ext_resource type="PackedScene" path="res://spirit/glow_ball.glb" id="2"]
+[ext_resource type="Material" path="res://resources/spirit/ball_core_material.tres" id="3"]
+[ext_resource type="Material" path="res://resources/spirit/ball_shell_material.tres" id="4"]
+[ext_resource type="Mesh" path="res://resources/spirit/ball_halo_mesh.tres" id="5"]
+[ext_resource type="Material" path="res://resources/spirit/aura_wisp_process.tres" id="6"]
+[ext_resource type="Mesh" path="res://resources/spirit/aura_wisp_mesh.tres" id="7"]
+[ext_resource type="Material" path="res://resources/spirit/aura_spark_process.tres" id="8"]
+[ext_resource type="Mesh" path="res://resources/spirit/aura_spark_mesh.tres" id="9"]
+[ext_resource type="Material" path="res://resources/spirit/trail_veil_process.tres" id="10"]
+[ext_resource type="Mesh" path="res://resources/spirit/trail_veil_mesh.tres" id="11"]
+[ext_resource type="Material" path="res://resources/spirit/trail_streak_process.tres" id="12"]
+[ext_resource type="Mesh" path="res://resources/spirit/trail_streak_mesh.tres" id="13"]
+[ext_resource type="Material" path="res://resources/spirit/trail_mote_process.tres" id="14"]
+[ext_resource type="Mesh" path="res://resources/spirit/trail_mote_mesh.tres" id="15"]
+[ext_resource type="Material" path="res://resources/spirit/burst_ring_process.tres" id="16"]
+[ext_resource type="Mesh" path="res://resources/spirit/burst_ring_mesh.tres" id="17"]
+[ext_resource type="Material" path="res://resources/spirit/burst_spark_process.tres" id="18"]
+[ext_resource type="Mesh" path="res://resources/spirit/burst_spark_mesh.tres" id="19"]
+[ext_resource type="Material" path="res://resources/spirit/burst_veil_process.tres" id="20"]
+[ext_resource type="Mesh" path="res://resources/spirit/burst_veil_mesh.tres" id="21"]
+
+[sub_resource type="SphereShape3D" id="ball_shape"]
+radius = 0.5
+
+[node name="SpiritBall" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1")
+core_material = ExtResource("3")
+shell_material = ExtResource("4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ball_shape")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Model" parent="Visual" instance=ExtResource("2")]
+transform = Transform3D(0.5556, 0, 0, 0, 0.5556, 0, 0, 0, 0.5556, 0, 0, 0)
+
+[node name="Halo" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = ExtResource("5")
+
+[node name="CoreLight" type="OmniLight3D" parent="."]
+light_color = Color(0.92, 0.96, 1, 1)
+light_energy = 2.4
+omni_range = 7.0
+
+[node name="AuraWisps" type="GPUParticles3D" parent="."]
+amount = 18
+lifetime = 1.6
+visibility_aabb = AABB(-3, -3, -3, 6, 6, 6)
+local_coords = true
+process_material = ExtResource("6")
+draw_pass_1 = ExtResource("7")
+
+[node name="AuraSparks" type="GPUParticles3D" parent="."]
+amount = 40
+lifetime = 1.2
+visibility_aabb = AABB(-3, -3, -3, 6, 6, 6)
+local_coords = true
+process_material = ExtResource("8")
+draw_pass_1 = ExtResource("9")
+
+[node name="TrailVeil" type="GPUParticles3D" parent="."]
+amount = 70
+lifetime = 1.5
+visibility_aabb = AABB(-40, -40, -40, 80, 80, 80)
+process_material = ExtResource("10")
+draw_pass_1 = ExtResource("11")
+
+[node name="TrailStreaks" type="GPUParticles3D" parent="."]
+amount = 36
+lifetime = 0.7
+visibility_aabb = AABB(-40, -40, -40, 80, 80, 80)
+process_material = ExtResource("12")
+draw_pass_1 = ExtResource("13")
+
+[node name="TrailMotes" type="GPUParticles3D" parent="."]
+amount = 60
+lifetime = 1.4
+visibility_aabb = AABB(-40, -40, -40, 80, 80, 80)
+process_material = ExtResource("14")
+draw_pass_1 = ExtResource("15")
+
+[node name="BurstRing" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 3
+lifetime = 0.55
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+process_material = ExtResource("16")
+draw_pass_1 = ExtResource("17")
+
+[node name="BurstSparks" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 48
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+process_material = ExtResource("18")
+draw_pass_1 = ExtResource("19")
+
+[node name="BurstVeil" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 14
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+process_material = ExtResource("20")
+draw_pass_1 = ExtResource("21")

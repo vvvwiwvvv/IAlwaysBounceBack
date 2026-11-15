@@ -1,5 +1,8 @@
+// CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
+// 3D MODELS: SKETCHFAB
+// BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
+
 shader_type spatial;
-// Stylised water: depth-tinted colour, shoreline foam and gentle ripples.
 
 uniform vec3 shallow_color : source_color = vec3(0.25, 0.82, 0.8);
 uniform vec3 deep_color : source_color = vec3(0.04, 0.3, 0.56);
