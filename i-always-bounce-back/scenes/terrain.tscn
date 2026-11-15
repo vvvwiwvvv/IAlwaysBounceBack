@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="ArrayMesh" path="res://terrain/forest.obj" id="1"]
+[ext_resource type="Material" path="res://resources/terrain_material.tres" id="2"]
+[ext_resource type="Shape3D" path="res://terrain/forest_shape.res" id="3"]
+
+[node name="Terrain" type="StaticBody3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = ExtResource("1")
+material_override = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = ExtResource("3")

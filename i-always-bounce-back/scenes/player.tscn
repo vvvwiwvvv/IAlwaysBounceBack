@@ -1,12 +1,37 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1"]
 [ext_resource type="PackedScene" path="res://player/idle.fbx" id="2"]
 [ext_resource type="Script" path="res://scripts/camera_rig.gd" id="3"]
+[ext_resource type="Script" path="res://scenes/Charge.gd" id="4"]
 
 [sub_resource type="CapsuleShape3D" id="capsule"]
 radius = 0.32
 height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="charge_mat"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.85, 0.3, 1)
+emission_enabled = true
+emission = Color(1, 0.75, 0.2, 1)
+emission_energy_multiplier = 4.0
+billboard_mode = 3
+
+[sub_resource type="ParticleProcessMaterial" id="charge_process"]
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3(0, 1, 0)
+spread = 40.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.5
+gravity = Vector3(0, 1, 0)
+scale_min = 0.5
+scale_max = 1.5
+
+[sub_resource type="QuadMesh" id="charge_quad"]
+size = Vector2(0.25, 0.25)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1")
@@ -19,3 +44,14 @@ shape = SubResource("capsule")
 
 [node name="CameraRig" type="Node3D" parent="."]
 script = ExtResource("3")
+
+[node name="ChargeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+amount = 200
+lifetime = 1.2
+material_override = SubResource("charge_mat")
+process_material = SubResource("charge_process")
+draw_pass_1 = SubResource("charge_quad")
+
+[node name="Charge" type="Node" parent="ChargeParticles"]
+script = ExtResource("4")

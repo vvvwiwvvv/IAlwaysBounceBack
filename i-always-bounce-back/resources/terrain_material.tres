@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://terrain/color_g.png" id="1_c4yiw"]
+
+[resource]
+albedo_texture = ExtResource("1_c4yiw")
+metallic_specular = 0.15
+roughness = 0.95
+texture_filter = 0
