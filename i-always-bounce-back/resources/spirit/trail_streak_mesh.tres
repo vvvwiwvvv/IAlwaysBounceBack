@@ -1,0 +1,26 @@
+[gd_resource type="ArrayMesh" format=4 uid="uid://qrrgekvou1md"]
+
+[ext_resource type="Texture2D" uid="uid://b5aapb6syjxwh" path="res://particles/PNG (Transparent)/trace_05.png" id="1_m1fmu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnmkv"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(2.2, 2.2, 2.4, 1)
+albedo_texture = ExtResource("1_m1fmu")
+disable_receive_shadows = true
+billboard_keep_scale = true
+
+[resource]
+_surfaces = [{
+"aabb": AABB(-0.17, -0.95, -0.17, 0.34, 1.9, 0.34),
+"attribute_data": PackedByteArray("/////wAAAAAAAIA//////wAAgD8AAIA//////wAAgD8AAAAA/////wAAAAAAAIA//////wAAgD8AAAAA/////wAAAAAAAAAA/////wAAAAAAAIA//////wAAgD8AAIA//////wAAgD8AAAAA/////wAAAAAAAIA//////wAAgD8AAAAA/////wAAAAAAAAAA"),
+"format": 34359738393,
+"material": SubResource("StandardMaterial3D_lnmkv"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("exQuvjMzc78AAAAAexQuPjMzc78AAAAAexQuPjMzcz8AAAAAexQuvjMzc78AAAAAexQuPjMzcz8AAAAAexQuvjMzcz8AAAAAAAAAADMzc797FC6+AAAAADMzc797FC4+AAAAADMzcz97FC4+AAAAADMzc797FC6+AAAAADMzcz97FC4+AAAAADMzcz97FC6+")
+}]

@@ -1,0 +1,444 @@
+[gd_scene load_steps=30 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/goblin.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bat.tscn" id="4"]
+[ext_resource type="AudioStream" path="res://audio/music.mp3" id="5"]
+[ext_resource type="AudioStream" path="res://audio/player_charging.mp3" id="6"]
+[ext_resource type="AudioStream" path="res://audio/player_landing.mp3" id="7"]
+[ext_resource type="AudioStream" path="res://audio/player_damage.mp3" id="8"]
+[ext_resource type="AudioStream" path="res://audio/goblin_attack.mp3" id="9"]
+[ext_resource type="AudioStream" path="res://audio/goblin_death.mp3" id="10"]
+[ext_resource type="AudioStream" path="res://audio/bat_death.mp3" id="11"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="12"]
+[ext_resource type="Texture2D" path="res://ui/stats/Speed.png" id="13"]
+[ext_resource type="Texture2D" path="res://ui/stats/ChargeForce.png" id="14"]
+[ext_resource type="Texture2D" path="res://ui/stats/damage.png" id="15"]
+[ext_resource type="Texture2D" path="res://ui/stats/kills.png" id="16"]
+[ext_resource type="Texture2D" path="res://ui/health/grey.png" id="17"]
+[ext_resource type="Texture2D" path="res://ui/health/under.png" id="18"]
+[ext_resource type="Texture2D" path="res://ui/health/empty.png" id="19"]
+[ext_resource type="Script" path="res://ui/health/hpbar.gd" id="20"]
+[ext_resource type="Texture2D" path="res://ui/portrait.png" id="21"]
+[ext_resource type="Script" path="res://scripts/shop.gd" id="22"]
+[ext_resource type="PackedScene" path="res://ui/shop/shoppanel.tscn" id="23"]
+
+[sub_resource type="StyleBoxFlat" id="portrait_frame"]
+bg_color = Color(0.16, 0.19, 0.27, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.93, 0.95, 1, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="charge_back"]
+bg_color = Color(0.08, 0.1, 0.16, 0.85)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="charge_fill"]
+bg_color = Color(0.25, 0.6, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Game" type="Node"]
+process_mode = 3
+script = ExtResource("1")
+slime_scene = ExtResource("2")
+goblin_scene = ExtResource("3")
+bat_scene = ExtResource("4")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5")
+volume_db = -14.0
+
+[node name="SfxCharge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6")
+volume_db = -6.0
+
+[node name="SfxLand" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7")
+volume_db = -4.0
+max_polyphony = 3
+
+[node name="SfxDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8")
+volume_db = -3.0
+
+[node name="SfxGoblinAttack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9")
+volume_db = -5.0
+
+[node name="SfxGoblinDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10")
+volume_db = -5.0
+max_polyphony = 3
+
+[node name="SfxBatDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11")
+volume_db = -5.0
+max_polyphony = 3
+
+[node name="SfxSlimeDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10")
+volume_db = -8.0
+pitch_scale = 1.7
+max_polyphony = 3
+
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("12")
+
+[node name="Root" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WaveLabel" type="Label" parent="HUD/Root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 14.0
+offset_bottom = 84.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.08, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 80
+text = "WAVE 1"
+horizontal_alignment = 1
+
+[node name="EnemiesLabel" type="Label" parent="HUD/Root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 86.0
+offset_bottom = 116.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.08, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "Enemies left, 0"
+horizontal_alignment = 1
+
+[node name="Notice" type="Label" parent="HUD/Root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 128.0
+offset_bottom = 164.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="HUD/Root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 172.0
+offset_bottom = 208.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.8, 0.95, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 34
+text = "HOLD RIGHT CLICK TO BOUNCE AGAIN"
+horizontal_alignment = 1
+
+[node name="BottomLeft" type="Control" parent="HUD/Root"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -262.0
+offset_right = 442.0
+offset_bottom = -18.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="StatSpeed" type="TextureRect" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 118.0
+offset_right = 174.0
+offset_bottom = 56.0
+texture = ExtResource("13")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="HUD/Root/BottomLeft/StatSpeed"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 54.0
+offset_right = 66.0
+offset_bottom = 76.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="StatForce" type="TextureRect" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 190.0
+offset_right = 246.0
+offset_bottom = 56.0
+texture = ExtResource("14")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="HUD/Root/BottomLeft/StatForce"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 54.0
+offset_right = 66.0
+offset_bottom = 76.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="StatDamage" type="TextureRect" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 262.0
+offset_right = 318.0
+offset_bottom = 56.0
+texture = ExtResource("15")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="HUD/Root/BottomLeft/StatDamage"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 54.0
+offset_right = 66.0
+offset_bottom = 76.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 102.0
+offset_right = 342.0
+offset_bottom = 166.0
+scale = Vector2(1.2, 1.2)
+value = 100.0
+texture_under = ExtResource("17")
+texture_over = ExtResource("18")
+texture_progress = ExtResource("19")
+tint_progress = Color(0, 1, 0.133333, 1)
+script = ExtResource("20")
+
+[node name="HealthText" type="Label" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 126.0
+offset_right = 380.0
+offset_bottom = 156.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "100 / 100"
+horizontal_alignment = 1
+
+[node name="ChargeBar" type="ProgressBar" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 180.0
+offset_right = 368.0
+offset_bottom = 190.0
+theme_override_styles/background = SubResource("charge_back")
+theme_override_styles/fill = SubResource("charge_fill")
+show_percentage = false
+
+[node name="PortraitFrame" type="Panel" parent="HUD/Root/BottomLeft"]
+clip_children = 2
+layout_mode = 0
+offset_top = 84.0
+offset_right = 112.0
+offset_bottom = 196.0
+theme_override_styles/panel = SubResource("portrait_frame")
+
+[node name="Portrait" type="TextureRect" parent="HUD/Root/BottomLeft/PortraitFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="KillsIcon" type="TextureRect" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 198.0
+offset_right = 162.0
+offset_bottom = 242.0
+texture = ExtResource("16")
+expand_mode = 1
+
+[node name="KillsLabel" type="Label" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 204.0
+offset_right = 240.0
+offset_bottom = 238.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 34
+text = "0"
+
+[node name="PointsLabel" type="Label" parent="HUD/Root/BottomLeft"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 204.0
+offset_right = 400.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 34
+text = "PTS 0"
+
+[node name="Hurt" type="ColorRect" parent="HUD/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.85, 0.05, 0.05, 0)
+
+[node name="Fade" type="ColorRect" parent="HUD/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Shop" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 5
+visible = false
+script = ExtResource("22")
+
+[node name="Root" type="Control" parent="Shop"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Shop/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.04, 0.08, 0.72)
+
+[node name="Title" type="Label" parent="Shop/Root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.08, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 72
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="Points" type="Label" parent="Shop/Root"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 132.0
+offset_bottom = 168.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
+theme_override_font_sizes/font_size = 36
+text = "POINTS  0"
+horizontal_alignment = 1
+
+[node name="Close" type="Label" parent="Shop/Root"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Press B to close and continue"
+horizontal_alignment = 1
+
+[node name="Panels" type="Control" parent="Shop/Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speed" parent="Shop/Root/Panels" instance=ExtResource("23")]
+layout_mode = 1
+offset_left = -336.0
+offset_top = -130.0
+offset_right = -143.0
+offset_bottom = 159.0
+
+[node name="Damage" parent="Shop/Root/Panels" instance=ExtResource("23")]
+layout_mode = 1
+offset_left = -96.0
+offset_top = -130.0
+offset_right = 97.0
+offset_bottom = 159.0
+sell = 1
+
+[node name="Bounce" parent="Shop/Root/Panels" instance=ExtResource("23")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = -130.0
+offset_right = 337.0
+offset_bottom = 159.0
+sell = 2

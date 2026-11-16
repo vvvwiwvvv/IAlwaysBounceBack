@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://shaders/sky.gdshader" id="1_rmejm"]
+
+[resource]
+shader = ExtResource("1_rmejm")
+shader_parameter/top_color = Color(0.16, 0.44, 0.92, 1)
+shader_parameter/horizon_color = Color(0.68, 0.87, 1, 1)
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/cloud_shadow_color = Color(0.6, 0.69, 0.87, 1)
+shader_parameter/cloud_cover = null
+shader_parameter/cloud_speed = null
+shader_parameter/sun_glow = null

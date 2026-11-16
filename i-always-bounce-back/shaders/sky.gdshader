@@ -1,5 +1,8 @@
+// CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
+// 3D MODELS: SKETCHFAB
+// BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
+
 shader_type sky;
-// Stylised painted sky: soft gradient, glowing sun and drifting clouds.
 
 uniform vec3 top_color : source_color = vec3(0.18, 0.45, 0.9);
 uniform vec3 horizon_color : source_color = vec3(0.7, 0.86, 1.0);
@@ -48,7 +51,6 @@ void sky() {
 		float n = fbm(uv);
 		float edge = 1.0 - cloud_cover;
 		float mask = smoothstep(edge, edge + 0.22, n);
-		// Brighter where the cloud thins toward the light, for a painted look.
 		float lit = smoothstep(edge + 0.05, edge + 0.4, fbm(uv + LIGHT0_DIRECTION.xz * 0.12));
 		vec3 cloud = mix(cloud_color, cloud_shadow_color, lit * 0.8);
 		cloud += sun_tint * pow(sun, 6.0) * 0.25;

@@ -1,0 +1,33 @@
+[gd_resource type="Environment" format=3]
+
+[ext_resource type="Sky" path="res://resources/sky.tres" id="1_f7h4m"]
+
+[resource]
+background_mode = 2
+sky = ExtResource("1_f7h4m")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.8
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_white = 6.0
+ssao_enabled = true
+ssao_radius = 1.6
+ssao_intensity = 1.6
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.12
+fog_enabled = true
+fog_light_color = Color(0.68, 0.87, 1, 1)
+fog_sun_scatter = 0.25
+fog_density = 0.0016
+fog_aerial_perspective = 0.7
+fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.006
+volumetric_fog_anisotropy = 0.7
+volumetric_fog_length = 160.0
+volumetric_fog_ambient_inject = 0.4
+volumetric_fog_sky_affect = 0.0
+adjustment_enabled = true
+adjustment_contrast = 1.04
+adjustment_saturation = 1.18

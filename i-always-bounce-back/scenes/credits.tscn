@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bnud2akjobx3h"]
+
+[ext_resource type="Texture2D" uid="uid://dbpcijbmruujj" path="res://ui/backdrop.png" id="1_2ckv8"]
+[ext_resource type="FontFile" uid="uid://dc0q4wb3hfdey" path="res://PixelPurl.ttf" id="2_2ckv8"]
+[ext_resource type="Script" path="res://scripts/credits.gd" id="3_credits"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wq7lk"]
+font = ExtResource("2_2ckv8")
+font_size = 32
+font_color = Color(0.6313726, 0, 1, 1)
+
+[node name="Credits" type="Control" unique_id=798996289]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_credits")
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=625503453]
+texture_filter = 1
+layout_mode = 0
+offset_left = -4.0
+offset_top = -15.0
+offset_right = 1280.0
+offset_bottom = 1140.0
+mouse_filter = 2
+texture = ExtResource("1_2ckv8")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="." unique_id=2060909706]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 130.0
+offset_right = 1017.0
+offset_bottom = 406.0
+text = "CREATORS:
+Mohammed Fawzan
+Muhammad Azaan
+Diego Maatouk
+
+CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
+3D MODELS: SKETCHFAB
+BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
+"
+label_settings = SubResource("LabelSettings_wq7lk")
+horizontal_alignment = 1

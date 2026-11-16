@@ -1,7 +1,9 @@
+# ALL CODE WAS DOWNLOADED FROM GDQUEST
+# CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
+# 3D MODELS: SKETCHFAB
+# BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
+
 extends CharacterBody3D
-## Third/first person character driven by the Mixamo clips in res://player.
-## Run speed, jump height and roll distance are measured from the clips' own
-## root motion, then jump and roll are pushed a little further by `boost`.
 
 const HIPS := "mixamorig_Hips"
 const HEAD_TOP := "mixamorig_HeadTop_End"
@@ -14,21 +16,22 @@ const CLIPS := {
 }
 
 @export var target_height := 1.75
-## Jump height and roll distance = animation's own value times this.
 @export var boost := 1.15
-## How quickly the character reaches run speed (higher = snappier).
 @export var acceleration := 7.0
-## How quickly it slows once keys are released (lower = longer slide).
 @export var friction := 3.5
 @export var air_control := 2.0
 @export var turn_speed := 12.0
-## How quickly animation weights follow the movement (exponential).
 @export var anim_smoothing := 8.0
 
 var run_speed := 7.0
 var gravity := 25.0
 var jump_velocity := 7.0
 var first_person := false
+var control_locked := false
+var aim_facing := false
+var time_compensation := 1.0
+var visual_scale := 1.0
+var speed_multiplier := 1.0
 
 var _model: Node3D
 var _tree: AnimationTree
@@ -47,6 +50,7 @@ var _roll_times := PackedFloat32Array()
 var _roll_z := PackedFloat32Array()
 
 @onready var camera_rig: Node3D = $CameraRig
+@onready var body_shape: CollisionShape3D = $CollisionShape3D
 
 
 func _ready() -> void:
@@ -79,14 +83,18 @@ func _setup_input() -> void:
 			var ev := InputEventKey.new()
 			ev.physical_keycode = code
 			InputMap.action_add_event(action, ev)
-	if not InputMap.has_action("attack"):
-		InputMap.add_action("attack")
+	var buttons := {
+		"attack": MOUSE_BUTTON_LEFT,
+		"charge": MOUSE_BUTTON_RIGHT,
+	}
+	for action: String in buttons:
+		if InputMap.has_action(action):
+			continue
+		InputMap.add_action(action)
 		var click := InputEventMouseButton.new()
-		click.button_index = MOUSE_BUTTON_LEFT
-		InputMap.action_add_event("attack", click)
+		click.button_index = buttons[action]
+		InputMap.action_add_event(action, click)
 
-
-# ---------------------------------------------------------------- animation
 
 func _build_animations() -> void:
 	var player: AnimationPlayer = _model.find_child("AnimationPlayer", true, false)
@@ -114,7 +122,6 @@ func _build_animations() -> void:
 				if dist > 0.5:
 					run_speed = dist / anim.length
 			"jump":
-				# Find the airborne part of the clip and how high the hips rise.
 				var peak := first.y
 				for k in count:
 					peak = maxf(peak, (anim.track_get_key_value(track, k) as Vector3).y)
@@ -136,7 +143,6 @@ func _build_animations() -> void:
 					jump_velocity = 4.0 * height / air
 					jump_start = maxf(takeoff - 0.04, 0.0)
 				jump_len = anim.length
-				# Physics lifts the body, so take the lift out of the clip.
 				for k in count:
 					var v: Vector3 = anim.track_get_key_value(track, k)
 					anim.track_set_key_value(track, k, Vector3(v.x, minf(v.y, first.y), v.z))
@@ -146,7 +152,6 @@ func _build_animations() -> void:
 					_roll_times.append(anim.track_get_key_time(track, k))
 					_roll_z.append(((anim.track_get_key_value(track, k) as Vector3).z - first.z) * _scale * boost)
 
-		# Keep every clip in place; the CharacterBody3D does the travelling.
 		for k in count:
 			var v: Vector3 = anim.track_get_key_value(track, k)
 			anim.track_set_key_value(track, k, Vector3(first.x, v.y, first.z))
@@ -180,6 +185,7 @@ func _build_animations() -> void:
 
 	_tree = AnimationTree.new()
 	_tree.tree_root = bt
+	_tree.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	_model.add_child(_tree)
 	_tree.anim_player = _tree.get_path_to(player)
 	_tree.active = true
@@ -189,7 +195,6 @@ func _one_shot(fade_in: float, fade_out: float) -> AnimationNodeOneShot:
 	var shot := AnimationNodeOneShot.new()
 	shot.fadein_time = fade_in
 	shot.fadeout_time = fade_out
-	# Exponential-style ease: fast start, long soft tail.
 	var ease_curve := Curve.new()
 	ease_curve.add_point(Vector2(0, 0), 0.0, 2.6)
 	ease_curve.add_point(Vector2(1, 1), 0.0, 0.0)
@@ -230,9 +235,20 @@ func _fade_out(shot: String) -> void:
 	_tree.set("parameters/%s/request" % shot, AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
 
 
-# ------------------------------------------------------------------ movement
+func _process(delta: float) -> void:
+	_tree.advance(delta * time_compensation)
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(tick: float) -> void:
+	var delta := tick * time_compensation
+	_apply_model_scale()
+	if control_locked:
+		velocity = Vector3.ZERO
+		_rolling = false
+		_jumping = false
+		_update_animation(0.0, delta)
+		return
+
 	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var yaw: float = camera_rig.yaw
 	var wish := Basis(Vector3.UP, yaw) * Vector3(input.x, 0.0, input.y)
@@ -260,18 +276,16 @@ func _physics_process(delta: float) -> void:
 
 	var horizontal := Vector3(velocity.x, 0.0, velocity.z)
 	if _rolling:
-		# Follow the clip's own forward curve, stretched by `boost`.
 		var step := _roll_offset(_roll_time + delta) - _roll_offset(_roll_time)
 		horizontal = _roll_dir * (step / delta)
 		_roll_time += delta
 		if _roll_time >= _roll_length - 0.12:
 			_rolling = false
 	else:
-		var target := Vector3.ZERO if slashing else wish * run_speed
+		var target := Vector3.ZERO if slashing else wish * run_speed * speed_multiplier
 		var rate := air_control
 		if grounded:
 			rate = acceleration if target.length() > 0.01 else friction
-		# Exponential approach: quick at first, easing into the target.
 		horizontal = horizontal.lerp(target, 1.0 - exp(-rate * delta))
 
 	if _jump_buffer > 0.0 and _coyote > 0.0 and not _rolling:
@@ -292,16 +306,20 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
+	velocity *= time_compensation
 	move_and_slide()
+	velocity /= time_compensation
 
-	_update_facing(horizontal, yaw, delta)
-	_update_animation(horizontal.length(), delta)
+	_update_facing(Vector3(velocity.x, 0.0, velocity.z), yaw, delta)
+	_update_animation(Vector3(velocity.x, 0.0, velocity.z).length(), delta)
 
 
 func _update_facing(horizontal: Vector3, yaw: float, delta: float) -> void:
 	var blend := 1.0 - exp(-turn_speed * delta)
 	if first_person:
-		_facing = lerp_angle(_facing, yaw + PI, blend * 2.0)
+		_facing = lerp_angle(_facing, yaw + PI, minf(blend * 2.0, 1.0))
+	elif aim_facing:
+		_facing = lerp_angle(_facing, yaw + PI, blend)
 	elif _rolling:
 		_facing = lerp_angle(_facing, atan2(_roll_dir.x, _roll_dir.z), blend)
 	elif horizontal.length() > 0.4:
@@ -310,12 +328,14 @@ func _update_facing(horizontal: Vector3, yaw: float, delta: float) -> void:
 
 
 func _update_animation(speed: float, delta: float) -> void:
-	# The run/idle mix tracks actual speed, so releasing the keys lets the run
-	# wind down with the slide instead of snapping to idle.
-	var ratio := clampf(speed / run_speed, 0.0, 1.0)
+	var ratio := clampf(speed / (run_speed * speed_multiplier), 0.0, 1.0)
 	_move_blend = lerpf(_move_blend, ratio, 1.0 - exp(-anim_smoothing * delta))
 	_tree.set("parameters/move/blend_amount", _move_blend)
-	_tree.set("parameters/run_scale/scale", lerpf(0.55, 1.0, _move_blend))
+	_tree.set("parameters/run_scale/scale", lerpf(0.55, 1.0, _move_blend) * sqrt(speed_multiplier))
+
+
+func _apply_model_scale() -> void:
+	_model.scale = Vector3.ONE * _scale * maxf(visual_scale, 0.001)
 
 
 func set_first_person(enabled: bool) -> void:
@@ -326,3 +346,28 @@ func set_first_person(enabled: bool) -> void:
 			else GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	for mesh: MeshInstance3D in _model.find_children("*", "MeshInstance3D", true, false):
 		mesh.cast_shadow = mode
+
+
+func set_model_transparency(amount: float) -> void:
+	var value := clampf(amount, 0.0, 1.0)
+	for mesh: MeshInstance3D in _model.find_children("*", "MeshInstance3D", true, false):
+		mesh.transparency = value
+
+
+func set_model_visible(shown: bool) -> void:
+	_model.visible = shown
+
+
+func set_body_enabled(enabled: bool) -> void:
+	body_shape.set_deferred("disabled", not enabled)
+
+
+func set_facing_direction(direction: Vector3) -> void:
+	_facing = atan2(direction.x, direction.z)
+	_model.rotation.y = _facing
+
+
+func cancel_ability() -> void:
+	var ability := get_node_or_null("SpiritAbility")
+	if ability and ability.has_method("cancel"):
+		ability.cancel()

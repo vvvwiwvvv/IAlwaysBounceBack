@@ -1,0 +1,17 @@
+[gd_resource type="QuadMesh" format=3 uid="uid://cwtcyuogl51dk"]
+
+[ext_resource type="Texture2D" uid="uid://py7iw38rlqnr" path="res://particles/PNG (Transparent)/light_01.png" id="1_6h84d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mteb"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(2, 2, 2.2, 0.9)
+albedo_texture = ExtResource("1_6h84d")
+disable_receive_shadows = true
+billboard_keep_scale = true
+
+[resource]
+material = SubResource("StandardMaterial3D_6mteb")
