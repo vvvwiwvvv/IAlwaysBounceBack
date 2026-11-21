@@ -103,8 +103,11 @@ outline_color = Color(1, 0.07180465, 0.42221224, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_wq7lk"]
 font = ExtResource("5_i6lef")
 font_size = 64
-font_color = Color(0.37, 0.3626, 0.3626, 1)
-shadow_size = 12
+font_color = Color(0.89742744, 0.8940652, 0.894062, 1)
+outline_size = 12
+outline_color = Color(0.30323282, 0.30323282, 0.30323282, 1)
+shadow_size = 36
+shadow_color = Color(0, 0, 0, 0.08627451)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wq7lk"]
 animations = [{
