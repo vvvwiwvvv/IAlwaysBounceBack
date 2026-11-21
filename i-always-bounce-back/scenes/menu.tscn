@@ -94,6 +94,12 @@
 [ext_resource type="Texture2D" uid="uid://b0m8hwxoyg5ca" path="res://ui/hoverBtn/btnHover21.png" id="92_thllp"]
 [ext_resource type="Texture2D" uid="uid://cm3fkoj7dsa8n" path="res://ui/hoverBtn/btnHover22.png" id="93_y04aq"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_mqypj"]
+font_size = 32
+font_color = Color(1, 0.6666607, 0.6331432, 1)
+outline_size = 3
+outline_color = Color(1, 0.07180465, 0.42221224, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_wq7lk"]
 font = ExtResource("5_i6lef")
 font_size = 64
@@ -518,6 +524,16 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v86rl")
+
+[node name="credithelper" type="Label" parent="." unique_id=1553478586]
+z_index = 3
+layout_mode = 0
+offset_left = 843.0
+offset_top = 652.0
+offset_right = 1222.0
+offset_bottom = 680.0
+text = "PRESS ANY BUTTON TO EXIT"
+label_settings = SubResource("LabelSettings_mqypj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=214823036]
 

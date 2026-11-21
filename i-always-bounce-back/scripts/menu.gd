@@ -12,7 +12,7 @@ const MUSIC := "res://audio/music.mp3"
 @onready var p3 = quit.position
 @onready var creditplayer = $creditsAnim
 @onready var titleplayer = $titleAnim
-
+@onready var help = $credithelper
 var incredits = false
 
 func _ready() -> void:
@@ -90,11 +90,14 @@ func _on_texture_button_2_pressed() -> void: #quit
 func _on_texture_button_3_pressed() -> void: #credits
 	creditplayer.play("move")
 	titleplayer.pause()
-	incredits = true
+	
+	glide_to(help, Vector2(0,-30),0.1)
 	
 	for child in get_children():
 		if child in moveables:
 			glide_to(child, Vector2(-1500,0),0.75)
+	await get_tree().create_timer(1.0).timeout
+	incredits = true
 	
 	
 
@@ -104,10 +107,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (key or click) and incredits:
 		incredits = false
 		creditplayer.stop()
-		titleplayer.play()
+		glide_to(help, Vector2(0,30),0.1)
 		for child in get_children():
 			if child in moveables:
 				glide_to(child, Vector2(1500,0),0.75)
+		await get_tree().create_timer(1.0).timeout
+		titleplayer.play()
 
 
 func _on_start_btn_mouse_entered() -> void:
