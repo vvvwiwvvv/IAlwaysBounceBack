@@ -2,5 +2,5 @@
 Haven Hackathon game submission, based on the theme: Bounce Back
 
 WASD - Movement
-RMB - Dash
+LMB - Dash
 B - Shop
