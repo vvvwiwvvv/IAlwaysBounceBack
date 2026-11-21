@@ -13,7 +13,7 @@ const MUSIC := "res://audio/music.mp3"
 @onready var creditplayer = $creditsAnim
 @onready var titleplayer = $titleAnim
 @onready var help = $credithelper
-var incredits = false
+var incredits = 0
 
 func _ready() -> void:
 	rect.color = Color(0, 0, 0, 1) 
@@ -47,9 +47,10 @@ func glide_hover(obj,target: Vector2, duration: float = 1.0) -> void:
 	
 var t2: Tween
 func btn_hover(btn: TextureButton, target: Vector2, duration: float = 1.0) -> void:
-	if incredits:
+	if incredits == 1 or incredits == 2:
 		return
-	sound(s1)
+	if target.x < 0:
+		sound(s1)
 	var pos
 	if btn == start:
 		pos = p1 + target
@@ -62,7 +63,9 @@ func btn_hover(btn: TextureButton, target: Vector2, duration: float = 1.0) -> vo
 	t2.set_ease(Tween.EASE_IN_OUT)
 	t2.tween_property(btn, "position", pos, duration)
 
-const s1 = preload("res://audio/click(3).wav")
+const s1 = preload("res://audio/hover.ogg")
+const s2 = preload("res://audio/confirm.ogg")
+
 func sound(stream: AudioStream) -> void:
 	var player = AudioStreamPlayer.new()
 	player.stream = stream
@@ -78,34 +81,42 @@ func fade(duration: float = 1.0) -> void:
 	await tween.finished 
 	
 func _on_texture_button_pressed() -> void: #start
+	sound(s2)
+	glide_hover($icon, Vector2(415,160), 0.5)
 	await fade(0.5)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func _on_texture_button_2_pressed() -> void: #quit
-	await fade(0.5)
+	sound(s2)
+	glide_hover($icon, Vector2(415,160), 0.5)
+	await fade(0.75)
+	await get_tree().create_timer(0.75).timeout
 	get_tree().quit()
 
 @onready var moveables: Array[Node]= [$startBtn,$quitBtn,$creditsBtn,$icon,$title,$hoverBtn,]
 func _on_texture_button_3_pressed() -> void: #credits
+	sound(s2)
 	creditplayer.play("move")
 	titleplayer.pause()
-	
+	credits.release_focus()
 	glide_to(help, Vector2(0,-30),0.1)
-	
+	incredits = 1
 	for child in get_children():
 		if child in moveables:
 			glide_to(child, Vector2(-1500,0),0.75)
 	await get_tree().create_timer(1.0).timeout
-	incredits = true
+	incredits = 2
+
 	
 	
 
 func _unhandled_input(event: InputEvent) -> void:
 	var key: bool = event is InputEventKey and event.pressed
 	var click: bool = event is InputEventMouseButton and event.pressed
-	if (key or click) and incredits:
-		incredits = false
+	if (key or click) and incredits == 2:
+		sound(s2)
+		incredits = 0
 		creditplayer.stop()
 		glide_to(help, Vector2(0,30),0.1)
 		for child in get_children():

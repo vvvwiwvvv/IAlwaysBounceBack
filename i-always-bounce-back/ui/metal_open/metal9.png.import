@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg48i6xxismev"
-path="res://.godot/imported/btnHover.png-264467aa3ed109d7835c2ceec97efb21.ctex"
+uid="uid://c6j3c8a7o5w2y"
+path="res://.godot/imported/metal9.png-3360023955a8770ac8374cafedc0d59c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/btnHover.png"
-dest_files=["res://.godot/imported/btnHover.png-264467aa3ed109d7835c2ceec97efb21.ctex"]
+source_file="res://ui/metal_open/metal9.png"
+dest_files=["res://.godot/imported/metal9.png-3360023955a8770ac8374cafedc0d59c.ctex"]
 
 [params]
 
