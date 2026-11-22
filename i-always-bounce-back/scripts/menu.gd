@@ -3,6 +3,7 @@ extends Control
 
 const MUSIC := "res://audio/music.mp3"
 @onready var rect: ColorRect = $ColorRect
+@onready var rect2: ColorRect = $ColorRect2
 @onready var hover: AnimatedSprite2D = $hoverBtn
 @onready var start: TextureButton = $startBtn
 @onready var credits: TextureButton = $creditsBtn
@@ -18,6 +19,8 @@ var incredits = 0
 func _ready() -> void:
 	rect.color = Color(0, 0, 0, 1) 
 	rect.modulate.a = 0.0  
+	rect2.color = Color(0, 0, 0, 1) 
+	rect2.modulate.a = 0.0  
 	get_tree().paused = false
 	Engine.time_scale = 1.0
 	Engine.physics_ticks_per_second = 60
@@ -75,23 +78,23 @@ func sound(stream: AudioStream) -> void:
 	player.play()
 	
 
-func fade(duration: float = 1.0) -> void:
+func fade(r: ColorRect, duration: float = 1.0) -> void:
 	var tween := create_tween()
-	tween.tween_property(rect, "modulate:a", 1.0, duration)
+	tween.tween_property(r, "modulate:a", 1.0, duration)
 	await tween.finished 
 	
 func _on_texture_button_pressed() -> void: #start
 	sound(s2)
 	glide_hover($icon, Vector2(415,160), 0.5)
-	await fade(0.5)
+	await fade(rect,0.5)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func _on_texture_button_2_pressed() -> void: #quit
 	sound(s2)
 	glide_hover($icon, Vector2(415,160), 0.5)
-	await fade(0.75)
-	await get_tree().create_timer(0.75).timeout
+	await fade(rect,0.75)
+	await fade(rect2,0.75)
 	get_tree().quit()
 
 @onready var moveables: Array[Node]= [$startBtn,$quitBtn,$creditsBtn,$icon,$title,$hoverBtn,]
@@ -128,16 +131,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_start_btn_mouse_entered() -> void:
 	btn_hover(start,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(502, 265), 0.2)
+	glide_hover(hover, Vector2(397, 319), 0.2)
 
 
 func _on_quit_btn_mouse_entered() -> void:
 	btn_hover(quit,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(340, 560), 0.2)
+	glide_hover(hover, Vector2(252, 575), 0.2)
 
 func _on_credits_btn_mouse_entered() -> void:
 	btn_hover(credits,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(400, 423), 0.2)
+	glide_hover(hover, Vector2(330, 460), 0.2)
 
 
 func _on_start_btn_mouse_exited() -> void:

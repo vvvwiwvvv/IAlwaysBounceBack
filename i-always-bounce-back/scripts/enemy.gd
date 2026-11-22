@@ -1,6 +1,3 @@
-# CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
-# 3D MODELS: SKETCHFAB
-# BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
 
 extends CharacterBody3D
 
@@ -131,6 +128,8 @@ func _die() -> void:
 		var length := _animation.get_animation(death_animation).length
 		_animation.play(death_animation, 0.05, length / maxf(death_time, 0.05))
 	died.emit(self)
+	if randf() < 0.01:
+		print()
 
 
 func _physics_process(delta: float) -> void:
