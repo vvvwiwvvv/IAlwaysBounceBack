@@ -1,4 +1,3 @@
-
 extends Control
 
 const MUSIC := "res://audio/music.mp3"
@@ -14,6 +13,7 @@ const MUSIC := "res://audio/music.mp3"
 @onready var creditplayer = $creditsAnim
 @onready var titleplayer = $titleAnim
 @onready var help = $credithelper
+@onready var icon = $icon
 var incredits = 0
 
 func _ready() -> void:
@@ -68,6 +68,7 @@ func btn_hover(btn: TextureButton, target: Vector2, duration: float = 1.0) -> vo
 
 const s1 = preload("res://audio/hover.ogg")
 const s2 = preload("res://audio/confirm.ogg")
+const s3 = preload("res://audio/crack.mp3")
 
 func sound(stream: AudioStream) -> void:
 	var player = AudioStreamPlayer.new()
@@ -88,7 +89,6 @@ func _on_texture_button_pressed() -> void: #start
 	glide_hover($icon, Vector2(415,160), 0.5)
 	await fade(rect,0.5)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
-
 
 func _on_texture_button_2_pressed() -> void: #quit
 	sound(s2)
@@ -153,3 +153,16 @@ func _on_quit_btn_mouse_exited() -> void:
 
 func _on_credits_btn_mouse_exited() -> void:
 	btn_hover(credits,Vector2(0, 0), 0.2)
+
+
+@onready var pos = icon.position
+func _on_icon_pressed() -> void:
+	sound(s3)
+	$GPUParticles2D.emitting = true
+	for i in 5:
+		glide_to(icon, Vector2((randf()*30)-15,(randf()*30)-15),0.05)
+		await get_tree().create_timer(0.05).timeout
+	icon.position = pos
+	$GPUParticles2D.emitting = false
+	
+	

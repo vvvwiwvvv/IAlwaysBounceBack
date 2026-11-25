@@ -10,9 +10,12 @@ signal stats_changed
 signal intermission_changed(seconds_left: float, active: bool)
 signal player_hurt
 signal shop_toggled(open: bool)
+signal inventory_toggled(open: bool)
+signal chest_toggled(open: bool)
 signal game_over_started
+var run_time := 0.0
 
-enum Stat { SPEED, DAMAGE, FORCE }
+enum Stat {HEALTH, SPEED, DAMAGE, FORCE }
 
 @export_group("Enemies")
 @export var slime_scene: PackedScene
@@ -36,6 +39,7 @@ enum Stat { SPEED, DAMAGE, FORCE }
 @export var base_damage := 10.0
 @export var damage_per_level := 6.0
 @export var force_per_level := 0.12
+@export var health_per_level := 50
 @export var upgrade_cost_step := 4
 
 @export_group("Flow")
@@ -46,10 +50,12 @@ var health := 100.0
 var wave := 0
 var points := 0
 var kills := 0
-var levels := {Stat.SPEED: 1, Stat.DAMAGE: 1, Stat.FORCE: 1}
+var levels := {Stat.HEALTH: 1, Stat.SPEED: 1, Stat.DAMAGE: 1, Stat.FORCE: 1}
 var alive := 0
 var over := false
 var shop_open := false
+var inventory_open:= false
+var chest_open := false 
 var in_intermission := false
 
 var _queue: Array[int] = []
@@ -117,6 +123,8 @@ func stat_value(stat: Stat) -> float:
 			return base_speed_multiplier + speed_per_level * float(level - 1)
 		Stat.DAMAGE:
 			return base_damage + damage_per_level * float(level - 1)
+		Stat.HEALTH:
+			return health + health_per_level * float(level - 1)
 		_:
 			return 1.0 + force_per_level * float(level - 1)
 
@@ -127,6 +135,8 @@ func stat_text(stat: Stat) -> String:
 			return "%.1f m/s" % (_player.run_speed * stat_value(stat))
 		Stat.DAMAGE:
 			return "%d dmg" % int(stat_value(stat))
+		Stat.HEALTH:
+			return "%d hp" % int(stat_value(stat))
 		_:
 			return "%d%%" % int(round(stat_value(stat) * 100.0))
 
@@ -144,6 +154,7 @@ func try_upgrade(stat: Stat) -> bool:
 	_apply_stats()
 	points_changed.emit(points)
 	stats_changed.emit()
+	health_changed.emit(health, max_health)
 	return true
 
 
@@ -151,11 +162,15 @@ func _apply_stats() -> void:
 	_player.speed_multiplier = stat_value(Stat.SPEED)
 	_ability.damage = stat_value(Stat.DAMAGE)
 	_ability.force_multiplier = stat_value(Stat.FORCE)
+	var mult = max_health
+	max_health = int(stat_value(Stat.HEALTH))
+	health *= max_health  / mult
 
 
 func _process(delta: float) -> void:
-	if over or shop_open:
-		return
+	if not get_tree().paused:
+		run_time += delta
+		$Inventory.refresh_time()
 	if in_intermission:
 		_intermission_left -= delta
 		intermission_changed.emit(maxf(_intermission_left, 0.0), wave > 0)
@@ -169,6 +184,7 @@ func _process(delta: float) -> void:
 			_spawn(_queue.pop_back())
 	elif alive <= 0:
 		_start_intermission()
+	
 
 
 func _start_intermission() -> void:
@@ -295,11 +311,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	if over:
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.physical_keycode == KEY_B and (in_intermission or shop_open) and wave > 0:
+		if event.physical_keycode == KEY_B:# and (in_intermission or shop_open) and wave > 0:
 			set_shop_open(not shop_open)
 		elif event.physical_keycode == KEY_ESCAPE and shop_open:
 			set_shop_open(false)
+	if event.is_action_pressed("inventory"):
+		set_inventory_open(not inventory_open)
 
+func set_chest_open(open: bool)->void:
+	if open == chest_open:
+		return
+	chest_open = open
+	get_tree().paused = open
+	chest_toggled.emit(open)
 
 func set_shop_open(open: bool) -> void:
 	if open == shop_open:
@@ -308,7 +332,13 @@ func set_shop_open(open: bool) -> void:
 	get_tree().paused = open
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if open else Input.MOUSE_MODE_CAPTURED
 	shop_toggled.emit(open)
-
+	
+func set_inventory_open(open: bool) -> void:
+	if open == inventory_open:
+		return
+	inventory_open = open
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if open else Input.MOUSE_MODE_CAPTURED
+	inventory_toggled.emit(open)
 
 func _game_over() -> void:
 	over = true
@@ -321,6 +351,7 @@ func _game_over() -> void:
 
 
 func _return_to_menu() -> void:
+	
 	get_tree().paused = false
 	Engine.time_scale = 1.0
 	Engine.physics_ticks_per_second = 60

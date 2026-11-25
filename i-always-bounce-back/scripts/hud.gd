@@ -37,7 +37,6 @@ func _ready() -> void:
 	_game.enemies_changed.connect(_on_enemies_changed)
 	_game.points_changed.connect(_on_points_changed)
 	_game.kills_changed.connect(_on_kills_changed)
-	_game.stats_changed.connect(_on_stats_changed)
 	_game.intermission_changed.connect(_on_intermission_changed)
 	_game.player_hurt.connect(_on_player_hurt)
 	_game.game_over_started.connect(_on_game_over)
@@ -89,11 +88,6 @@ func _on_points_changed(total: int) -> void:
 func _on_kills_changed(total: int) -> void:
 	kills_label.text = str(total)
 
-
-func _on_stats_changed() -> void:
-	speed_label.text = "LV %d" % int(_game.levels[_game.Stat.SPEED])
-	force_label.text = "LV %d" % int(_game.levels[_game.Stat.FORCE])
-	damage_label.text = "LV %d" % int(_game.levels[_game.Stat.DAMAGE])
 
 
 func _on_intermission_changed(seconds_left: float, active: bool) -> void:

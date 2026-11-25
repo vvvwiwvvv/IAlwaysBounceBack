@@ -1,41 +1,30 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene format=3 uid="uid://ccb56xp6hi1re"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1"]
+[ext_resource type="Script" uid="uid://b6hg4uiupb6gf" path="res://scripts/game.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/goblin.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bat.tscn" id="4"]
-[ext_resource type="AudioStream" path="res://audio/music.mp3" id="5"]
-[ext_resource type="AudioStream" path="res://audio/player_charging.mp3" id="6"]
-[ext_resource type="AudioStream" path="res://audio/player_landing.mp3" id="7"]
-[ext_resource type="AudioStream" path="res://audio/player_damage.mp3" id="8"]
-[ext_resource type="AudioStream" path="res://audio/goblin_attack.mp3" id="9"]
-[ext_resource type="AudioStream" path="res://audio/goblin_death.mp3" id="10"]
-[ext_resource type="AudioStream" path="res://audio/bat_death.mp3" id="11"]
-[ext_resource type="Script" path="res://scripts/hud.gd" id="12"]
-[ext_resource type="Texture2D" path="res://ui/stats/Speed.png" id="13"]
-[ext_resource type="Texture2D" path="res://ui/stats/ChargeForce.png" id="14"]
-[ext_resource type="Texture2D" path="res://ui/stats/damage.png" id="15"]
-[ext_resource type="Texture2D" path="res://ui/stats/kills.png" id="16"]
-[ext_resource type="Texture2D" path="res://ui/health/grey.png" id="17"]
-[ext_resource type="Texture2D" path="res://ui/health/under.png" id="18"]
-[ext_resource type="Texture2D" path="res://ui/health/empty.png" id="19"]
-[ext_resource type="Script" path="res://ui/health/hpbar.gd" id="20"]
-[ext_resource type="Texture2D" path="res://ui/portrait.png" id="21"]
-[ext_resource type="Script" path="res://scripts/shop.gd" id="22"]
-[ext_resource type="PackedScene" path="res://ui/shop/shoppanel.tscn" id="23"]
-
-[sub_resource type="StyleBoxFlat" id="portrait_frame"]
-bg_color = Color(0.16, 0.19, 0.27, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.93, 0.95, 1, 1)
-corner_radius_top_left = 56
-corner_radius_top_right = 56
-corner_radius_bottom_right = 56
-corner_radius_bottom_left = 56
-corner_detail = 16
+[ext_resource type="AudioStream" uid="uid://b4cg6c3prwxt2" path="res://audio/music.mp3" id="5"]
+[ext_resource type="AudioStream" uid="uid://b7nlko7ud3ej4" path="res://audio/player_charging.mp3" id="6"]
+[ext_resource type="AudioStream" uid="uid://cu6dqgygwasew" path="res://audio/player_landing.mp3" id="7"]
+[ext_resource type="AudioStream" uid="uid://qsu4u8y8nk5w" path="res://audio/player_damage.mp3" id="8"]
+[ext_resource type="AudioStream" uid="uid://d3aonvf306cba" path="res://audio/goblin_attack.mp3" id="9"]
+[ext_resource type="AudioStream" uid="uid://07ta866kc5ij" path="res://audio/goblin_death.mp3" id="10"]
+[ext_resource type="AudioStream" uid="uid://dxj8g0rxihxkd" path="res://audio/bat_death.mp3" id="11"]
+[ext_resource type="Script" uid="uid://crn0m8mnar80r" path="res://scripts/hud.gd" id="12"]
+[ext_resource type="Script" uid="uid://d0vvjqioycav8" path="res://scripts/minimap.gd" id="13_e1j6l"]
+[ext_resource type="Texture2D" uid="uid://2ckc3kcdolwr" path="res://ui/minimap/dot.png" id="14_pl11u"]
+[ext_resource type="Texture2D" uid="uid://b2u43gaoqkcge" path="res://ui/stats/kills.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://dogdilwaax1tc" path="res://ui/health/grey.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://7gq8ugoy6ur" path="res://ui/health/under.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://bie048uh3huc7" path="res://ui/health/empty.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://q1ie62h0c8w5" path="res://ui/inventory.png" id="19_5newe"]
+[ext_resource type="Script" uid="uid://2qej4srgq01t" path="res://scripts/inventory.gd" id="19_37s47"]
+[ext_resource type="Script" uid="uid://cp8aosndlhssx" path="res://ui/health/hpbar.gd" id="20"]
+[ext_resource type="Texture2D" uid="uid://dgm7tcsrxvkw5" path="res://ui/portrait.png" id="21"]
+[ext_resource type="Script" uid="uid://cpic723f5p3bt" path="res://scripts/shop.gd" id="22"]
+[ext_resource type="PackedScene" uid="uid://crhko48p6p874" path="res://ui/shop/shoppanel.tscn" id="23"]
+[ext_resource type="Script" uid="uid://cplg3ifk7fb00" path="res://scripts/chest.gd" id="23_bt5mj"]
 
 [sub_resource type="StyleBoxFlat" id="charge_back"]
 bg_color = Color(0.08, 0.1, 0.16, 0.85)
@@ -51,55 +40,92 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Game" type="Node"]
+[sub_resource type="StyleBoxFlat" id="portrait_frame"]
+bg_color = Color(0.16, 0.19, 0.27, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.93, 0.95, 1, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 16
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wq7lk"]
+texture = ExtResource("19_5newe")
+
+[sub_resource type="LabelSettings" id="LabelSettings_37s47"]
+font_size = 28
+font_color = Color(0.5058824, 0.6039216, 0.654902, 1)
+
+[node name="Game" type="Node" unique_id=1181334870]
 process_mode = 3
 script = ExtResource("1")
 slime_scene = ExtResource("2")
 goblin_scene = ExtResource("3")
 bat_scene = ExtResource("4")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1994123199]
 stream = ExtResource("5")
 volume_db = -14.0
 
-[node name="SfxCharge" type="AudioStreamPlayer" parent="."]
+[node name="SfxCharge" type="AudioStreamPlayer" parent="." unique_id=1611497788]
 stream = ExtResource("6")
 volume_db = -6.0
 
-[node name="SfxLand" type="AudioStreamPlayer" parent="."]
+[node name="SfxLand" type="AudioStreamPlayer" parent="." unique_id=383579497]
 stream = ExtResource("7")
 volume_db = -4.0
 max_polyphony = 3
 
-[node name="SfxDamage" type="AudioStreamPlayer" parent="."]
+[node name="SfxDamage" type="AudioStreamPlayer" parent="." unique_id=1480902606]
 stream = ExtResource("8")
 volume_db = -3.0
 
-[node name="SfxGoblinAttack" type="AudioStreamPlayer" parent="."]
+[node name="SfxGoblinAttack" type="AudioStreamPlayer" parent="." unique_id=361259202]
 stream = ExtResource("9")
 volume_db = -5.0
 
-[node name="SfxGoblinDeath" type="AudioStreamPlayer" parent="."]
+[node name="SfxGoblinDeath" type="AudioStreamPlayer" parent="." unique_id=1380850370]
 stream = ExtResource("10")
 volume_db = -5.0
 max_polyphony = 3
 
-[node name="SfxBatDeath" type="AudioStreamPlayer" parent="."]
+[node name="SfxBatDeath" type="AudioStreamPlayer" parent="." unique_id=2098937195]
 stream = ExtResource("11")
 volume_db = -5.0
 max_polyphony = 3
 
-[node name="SfxSlimeDeath" type="AudioStreamPlayer" parent="."]
+[node name="SfxSlimeDeath" type="AudioStreamPlayer" parent="." unique_id=1505887531]
 stream = ExtResource("10")
 volume_db = -8.0
 pitch_scale = 1.7
 max_polyphony = 3
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Minimap" type="CanvasLayer" parent="." unique_id=1697957210]
+layer = 2
+
+[node name="Minimap" type="Control" parent="Minimap" unique_id=1536074165]
+z_index = 6
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1022.99994
+offset_top = 1.0
+offset_right = 1063.0
+offset_bottom = 41.0
+scale = Vector2(3.1811101, 3.1811101)
+script = ExtResource("13_e1j6l")
+dot = ExtResource("14_pl11u")
+boss_dot = ExtResource("14_pl11u")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1688158943]
 process_mode = 3
 script = ExtResource("12")
 
-[node name="Root" type="Control" parent="HUD"]
+[node name="Root" type="Control" parent="HUD" unique_id=2002183708]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +134,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="WaveLabel" type="Label" parent="HUD/Root"]
+[node name="WaveLabel" type="Label" parent="HUD/Root" unique_id=1822778061]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -122,7 +148,7 @@ theme_override_font_sizes/font_size = 80
 text = "WAVE 1"
 horizontal_alignment = 1
 
-[node name="EnemiesLabel" type="Label" parent="HUD/Root"]
+[node name="EnemiesLabel" type="Label" parent="HUD/Root" unique_id=1740976332]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -136,7 +162,7 @@ theme_override_font_sizes/font_size = 30
 text = "Enemies left, 0"
 horizontal_alignment = 1
 
-[node name="Notice" type="Label" parent="HUD/Root"]
+[node name="Notice" type="Label" parent="HUD/Root" unique_id=1646087266]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -149,7 +175,7 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 34
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="HUD/Root"]
+[node name="Hint" type="Label" parent="HUD/Root" unique_id=520295580]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -163,80 +189,20 @@ theme_override_font_sizes/font_size = 34
 text = "HOLD RIGHT CLICK TO BOUNCE AGAIN"
 horizontal_alignment = 1
 
-[node name="BottomLeft" type="Control" parent="HUD/Root"]
+[node name="BottomLeft" type="Control" parent="HUD/Root" unique_id=963798632]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = -262.0
-offset_right = 442.0
-offset_bottom = -18.0
+offset_left = 7.0
+offset_top = -197.0
+offset_right = 427.0
+offset_bottom = 47.0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="StatSpeed" type="TextureRect" parent="HUD/Root/BottomLeft"]
-layout_mode = 0
-offset_left = 118.0
-offset_right = 174.0
-offset_bottom = 56.0
-texture = ExtResource("13")
-expand_mode = 1
-
-[node name="Value" type="Label" parent="HUD/Root/BottomLeft/StatSpeed"]
-layout_mode = 0
-offset_left = -10.0
-offset_top = 54.0
-offset_right = 66.0
-offset_bottom = 76.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 22
-text = "LV 1"
-horizontal_alignment = 1
-
-[node name="StatForce" type="TextureRect" parent="HUD/Root/BottomLeft"]
-layout_mode = 0
-offset_left = 190.0
-offset_right = 246.0
-offset_bottom = 56.0
-texture = ExtResource("14")
-expand_mode = 1
-
-[node name="Value" type="Label" parent="HUD/Root/BottomLeft/StatForce"]
-layout_mode = 0
-offset_left = -10.0
-offset_top = 54.0
-offset_right = 66.0
-offset_bottom = 76.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 22
-text = "LV 1"
-horizontal_alignment = 1
-
-[node name="StatDamage" type="TextureRect" parent="HUD/Root/BottomLeft"]
-layout_mode = 0
-offset_left = 262.0
-offset_right = 318.0
-offset_bottom = 56.0
-texture = ExtResource("15")
-expand_mode = 1
-
-[node name="Value" type="Label" parent="HUD/Root/BottomLeft/StatDamage"]
-layout_mode = 0
-offset_left = -10.0
-offset_top = 54.0
-offset_right = 66.0
-offset_bottom = 76.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 22
-text = "LV 1"
-horizontal_alignment = 1
-
-[node name="HealthBar" type="TextureProgressBar" parent="HUD/Root/BottomLeft"]
+[node name="HealthBar" type="TextureProgressBar" parent="HUD/Root/BottomLeft" unique_id=544548112]
 layout_mode = 0
 offset_left = 86.0
 offset_top = 102.0
@@ -250,7 +216,7 @@ texture_progress = ExtResource("19")
 tint_progress = Color(0, 1, 0.133333, 1)
 script = ExtResource("20")
 
-[node name="HealthText" type="Label" parent="HUD/Root/BottomLeft"]
+[node name="HealthText" type="Label" parent="HUD/Root/BottomLeft" unique_id=207770113]
 layout_mode = 0
 offset_left = 110.0
 offset_top = 126.0
@@ -262,7 +228,7 @@ theme_override_font_sizes/font_size = 28
 text = "100 / 100"
 horizontal_alignment = 1
 
-[node name="ChargeBar" type="ProgressBar" parent="HUD/Root/BottomLeft"]
+[node name="ChargeBar" type="ProgressBar" parent="HUD/Root/BottomLeft" unique_id=937465111]
 layout_mode = 0
 offset_left = 118.0
 offset_top = 180.0
@@ -272,7 +238,7 @@ theme_override_styles/background = SubResource("charge_back")
 theme_override_styles/fill = SubResource("charge_fill")
 show_percentage = false
 
-[node name="PortraitFrame" type="Panel" parent="HUD/Root/BottomLeft"]
+[node name="PortraitFrame" type="Panel" parent="HUD/Root/BottomLeft" unique_id=1995962657]
 clip_children = 2
 layout_mode = 0
 offset_top = 84.0
@@ -280,7 +246,7 @@ offset_right = 112.0
 offset_bottom = 196.0
 theme_override_styles/panel = SubResource("portrait_frame")
 
-[node name="Portrait" type="TextureRect" parent="HUD/Root/BottomLeft/PortraitFrame"]
+[node name="Portrait" type="TextureRect" parent="HUD/Root/BottomLeft/PortraitFrame" unique_id=870764269]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -295,39 +261,39 @@ texture = ExtResource("21")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="KillsIcon" type="TextureRect" parent="HUD/Root/BottomLeft"]
+[node name="KillsIcon" type="TextureRect" parent="HUD/Root/BottomLeft" unique_id=643876582]
 layout_mode = 0
-offset_left = 118.0
-offset_top = 198.0
-offset_right = 162.0
-offset_bottom = 242.0
+offset_left = 117.0
+offset_top = 56.0
+offset_right = 161.0
+offset_bottom = 100.0
 texture = ExtResource("16")
 expand_mode = 1
 
-[node name="KillsLabel" type="Label" parent="HUD/Root/BottomLeft"]
+[node name="KillsLabel" type="Label" parent="HUD/Root/BottomLeft" unique_id=926175683]
 layout_mode = 0
-offset_left = 168.0
-offset_top = 204.0
-offset_right = 240.0
-offset_bottom = 238.0
+offset_left = 167.0
+offset_top = 65.0
+offset_right = 239.0
+offset_bottom = 99.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 34
 text = "0"
 
-[node name="PointsLabel" type="Label" parent="HUD/Root/BottomLeft"]
+[node name="PointsLabel" type="Label" parent="HUD/Root/BottomLeft" unique_id=284479474]
 layout_mode = 0
-offset_left = 246.0
-offset_top = 204.0
-offset_right = 400.0
-offset_bottom = 238.0
+offset_left = 256.0
+offset_top = 67.0
+offset_right = 410.0
+offset_bottom = 101.0
 theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 34
 text = "PTS 0"
 
-[node name="Hurt" type="ColorRect" parent="HUD/Root"]
+[node name="Hurt" type="ColorRect" parent="HUD/Root" unique_id=708114681]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -337,7 +303,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.85, 0.05, 0.05, 0)
 
-[node name="Fade" type="ColorRect" parent="HUD/Root"]
+[node name="Fade" type="ColorRect" parent="HUD/Root" unique_id=71479968]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -347,13 +313,200 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Shop" type="CanvasLayer" parent="."]
+[node name="Inventory" type="CanvasLayer" parent="." unique_id=604813335]
+script = ExtResource("19_37s47")
+
+[node name="Control" type="Control" parent="Inventory" unique_id=394927677]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Dim" type="ColorRect" parent="Inventory/Control" unique_id=1920492302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.1035156e-05
+offset_bottom = -6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(28.776434, 28.776434)
+mouse_filter = 2
+color = Color(0.03, 0.04, 0.08, 0.72)
+
+[node name="Panel" type="Panel" parent="Inventory/Control" unique_id=876696772]
+texture_filter = 1
+layout_mode = 0
+offset_left = 169.0
+offset_top = 681.0
+offset_right = 760.0
+offset_bottom = 1148.0
+scale = Vector2(1.3500351, 1.0522627)
+theme_override_styles/panel = SubResource("StyleBoxTexture_wq7lk")
+
+[node name="info" type="Label" parent="Inventory/Control/Panel" unique_id=634707010]
+texture_filter = 1
+layout_mode = 0
+offset_left = 295.54788
+offset_top = 20.907349
+offset_right = 447.54788
+offset_bottom = 129.90735
+text = "TIME: 
+LEVEL: 
+ENEMIES LEFT: 
+WAVE: 
+KILLS
+MAP:"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="wave" type="Label" parent="Inventory/Control/Panel/info" unique_id=707178794]
+texture_filter = 1
+layout_mode = 0
+offset_left = 143.7
+offset_top = 82.67898
+offset_right = 295.7
+offset_bottom = 191.679
+text = "0
+"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="time" type="Label" parent="Inventory/Control/Panel/info" unique_id=1510359642]
+texture_filter = 1
+layout_mode = 0
+offset_left = 142.21855
+offset_right = 294.21857
+offset_bottom = 109.000015
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="lname" type="Label" parent="Inventory/Control/Panel/info" unique_id=707497198]
+texture_filter = 1
+layout_mode = 0
+offset_left = 142.95926
+offset_top = 27.55964
+offset_right = 294.95926
+offset_bottom = 136.55965
+text = "FOREST"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="kills" type="Label" parent="Inventory/Control/Panel/info" unique_id=876655984]
+texture_filter = 1
+layout_mode = 0
+offset_left = 143.69995
+offset_top = 112.13934
+offset_right = 295.69995
+offset_bottom = 221.13934
+text = "0"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="enemies" type="Label" parent="Inventory/Control/Panel/info" unique_id=1962329886]
+texture_filter = 1
+layout_mode = 0
+offset_left = 143.69998
+offset_top = 56.06967
+offset_right = 295.69998
+offset_bottom = 165.06967
+text = "0"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="stats" type="Label" parent="Inventory/Control/Panel" unique_id=1938548171]
+texture_filter = 1
+layout_mode = 0
+offset_left = 12.592262
+offset_top = 19.957092
+offset_right = 201.59225
+offset_bottom = 184.95709
+text = "STATS
+POINTS: 
+HEALTH: 
+SPEED: 
+COOLDOWN: 
+DAMAGE: "
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="points" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1148267266]
+texture_filter = 1
+layout_mode = 0
+offset_left = 114.071106
+offset_top = 28.509901
+offset_right = 303.0711
+offset_bottom = 193.50989
+text = "0
+"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="health" type="Label" parent="Inventory/Control/Panel/stats" unique_id=2016410391]
+texture_filter = 1
+layout_mode = 0
+offset_left = 114.811844
+offset_top = 56.06952
+offset_right = 303.81183
+offset_bottom = 221.06952
+text = "100/100"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="speed" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1087217797]
+texture_filter = 1
+layout_mode = 0
+offset_left = 114.811844
+offset_top = 83.62921
+offset_right = 303.81183
+offset_bottom = 248.62921
+text = "0
+"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="cooldown" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1247999540]
+texture_filter = 1
+layout_mode = 0
+offset_left = 114.811844
+offset_top = 112.13916
+offset_right = 303.81183
+offset_bottom = 277.13916
+text = "0"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="damage" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1600174887]
+texture_filter = 1
+layout_mode = 0
+offset_left = 115.55256
+offset_top = 139.69885
+offset_right = 304.55258
+offset_bottom = 304.69885
+text = "0"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="items" type="Label" parent="Inventory/Control/Panel" unique_id=1273767861]
+texture_filter = 1
+layout_mode = 0
+offset_left = 14.073708
+offset_top = 203.37128
+offset_right = 74.073715
+offset_bottom = 228.37128
+text = "ITEMS:"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="controls" type="Label" parent="Inventory/Control/Panel" unique_id=861804061]
+texture_filter = 1
+layout_mode = 0
+offset_left = 291.84427
+offset_top = 332.61658
+offset_right = 635.84424
+offset_bottom = 469.61658
+text = "CONTROLS
+WASD - Move      Q - Ability
+LMB - Dash        
+TAB - Inventory
+"
+label_settings = SubResource("LabelSettings_37s47")
+
+[node name="Shop" type="CanvasLayer" parent="." unique_id=1124372180]
 process_mode = 3
 layer = 5
-visible = false
 script = ExtResource("22")
 
-[node name="Root" type="Control" parent="Shop"]
+[node name="Root" type="Control" parent="Shop" unique_id=1119620166]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -361,16 +514,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dim" type="ColorRect" parent="Shop/Root"]
+[node name="Dim" type="ColorRect" parent="Shop/Root" unique_id=254367822]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.03, 0.04, 0.08, 0.72)
 
-[node name="Title" type="Label" parent="Shop/Root"]
+[node name="Title" type="Label" parent="Shop/Root" unique_id=1362465567]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -384,7 +538,7 @@ theme_override_font_sizes/font_size = 72
 text = "SHOP"
 horizontal_alignment = 1
 
-[node name="Points" type="Label" parent="Shop/Root"]
+[node name="Points" type="Label" parent="Shop/Root" unique_id=1611364431]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -396,7 +550,7 @@ theme_override_font_sizes/font_size = 36
 text = "POINTS  0"
 horizontal_alignment = 1
 
-[node name="Close" type="Label" parent="Shop/Root"]
+[node name="Close" type="Label" parent="Shop/Root" unique_id=782771342]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -410,7 +564,7 @@ theme_override_font_sizes/font_size = 30
 text = "Press B to close and continue"
 horizontal_alignment = 1
 
-[node name="Panels" type="Control" parent="Shop/Root"]
+[node name="Panels" type="Control" parent="Shop/Root" unique_id=936825795]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -420,25 +574,102 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Speed" parent="Shop/Root/Panels" instance=ExtResource("23")]
-layout_mode = 1
-offset_left = -336.0
-offset_top = -130.0
-offset_right = -143.0
-offset_bottom = 159.0
+[node name="pane4" parent="Shop/Root/Panels" unique_id=53891178 instance=ExtResource("23")]
+position = Vector2(303, -150)
+scale = Vector2(2.447, 2.447)
+sell = 3
 
-[node name="Damage" parent="Shop/Root/Panels" instance=ExtResource("23")]
-layout_mode = 1
-offset_left = -96.0
-offset_top = -130.0
-offset_right = 97.0
-offset_bottom = 159.0
+[node name="pane1" parent="Shop/Root/Panels" unique_id=1789704364 instance=ExtResource("23")]
+position = Vector2(-563, -155.00002)
+
+[node name="pane2" parent="Shop/Root/Panels" unique_id=1086616810 instance=ExtResource("23")]
+position = Vector2(-273.99997, -152.99998)
 sell = 1
 
-[node name="Bounce" parent="Shop/Root/Panels" instance=ExtResource("23")]
+[node name="pane3" parent="Shop/Root/Panels" unique_id=1248151435 instance=ExtResource("23")]
+position = Vector2(17, -149.00002)
+sell = 2
+
+[node name="Chest" type="CanvasLayer" parent="." unique_id=1385068130]
+process_mode = 3
+layer = 5
+visible = false
+script = ExtResource("23_bt5mj")
+
+[node name="Root" type="Control" parent="Chest" unique_id=1437021978]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Chest/Root" unique_id=1160492710]
 layout_mode = 1
-offset_left = 144.0
-offset_top = -130.0
-offset_right = 337.0
-offset_bottom = 159.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.04, 0.08, 0.72)
+
+[node name="Title" type="Label" parent="Chest/Root" unique_id=687001280]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.08, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 72
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="Points" type="Label" parent="Chest/Root" unique_id=1886543153]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 132.0
+offset_bottom = 168.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
+theme_override_font_sizes/font_size = 36
+text = "POINTS  0"
+horizontal_alignment = 1
+
+[node name="Close" type="Label" parent="Chest/Root" unique_id=256630499]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Press B to close and continue"
+horizontal_alignment = 1
+
+[node name="Panels" type="Control" parent="Chest/Root" unique_id=637724926]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pane1" parent="Chest/Root/Panels" unique_id=1255646926 instance=ExtResource("23")]
+position = Vector2(-451.00003, -155.00002)
+
+[node name="pane2" parent="Chest/Root/Panels" unique_id=658215633 instance=ExtResource("23")]
+position = Vector2(-125.99999, -152.99998)
+sell = 1
+
+[node name="pane3" parent="Chest/Root/Panels" unique_id=1325636730 instance=ExtResource("23")]
+position = Vector2(201.99998, -149.00002)
 sell = 2

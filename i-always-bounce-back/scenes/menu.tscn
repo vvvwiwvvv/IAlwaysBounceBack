@@ -93,6 +93,7 @@
 [ext_resource type="Texture2D" uid="uid://3m3gtnsbi2wm" path="res://ui/hoverBtn/btnHover20.png" id="91_tjuw6"]
 [ext_resource type="Texture2D" uid="uid://b0m8hwxoyg5ca" path="res://ui/hoverBtn/btnHover21.png" id="92_thllp"]
 [ext_resource type="Texture2D" uid="uid://cm3fkoj7dsa8n" path="res://ui/hoverBtn/btnHover22.png" id="93_y04aq"]
+[ext_resource type="Texture2D" uid="uid://crcxsl4jpbt5m" path="res://ui/particle.png" id="94_j2xhi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mqypj"]
 font_size = 32
@@ -517,6 +518,22 @@ _data = {
 &"move": SubResource("Animation_uvxsm")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqypj"]
+lifetime_randomness = 0.32
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 37.88
+angle_min = -720.0
+angle_max = 720.0
+inherit_velocity_ratio = 0.483
+spread = 141.521
+flatness = 0.169
+initial_velocity_min = 129.45
+initial_velocity_max = 419.56998
+angular_velocity_min = -279.18002
+angular_velocity_max = 1.9499838
+gravity = Vector3(0, 500, 0)
+
 [node name="Control" type="Control" unique_id=1164773412]
 layout_mode = 3
 anchors_preset = 15
@@ -643,7 +660,7 @@ offset_bottom = 89.30911
 text = "QUIT"
 label_settings = SubResource("LabelSettings_wq7lk")
 
-[node name="icon" type="TextureRect" parent="." unique_id=2110225116]
+[node name="icon" type="TextureButton" parent="." unique_id=1420619155]
 z_index = 4
 texture_filter = 1
 layout_mode = 0
@@ -652,7 +669,7 @@ offset_top = 7.0000076
 offset_right = 1129.0
 offset_bottom = 343.0
 rotation = 0.2769766
-texture = ExtResource("2_mhnvy")
+texture_normal = ExtResource("2_mhnvy")
 stretch_mode = 4
 
 [node name="title" type="TextureRect" parent="." unique_id=1607309079]
@@ -673,7 +690,7 @@ position = Vector2(574, 321)
 scale = Vector2(2.7457564, 2.9742339)
 sprite_frames = SubResource("SpriteFrames_wq7lk")
 autoplay = "default"
-frame_progress = 0.5091157
+frame_progress = 0.89205015
 
 [node name="hoverBtn" type="AnimatedSprite2D" parent="." unique_id=584679494]
 texture_filter = 1
@@ -692,7 +709,7 @@ layout_mode = 0
 offset_left = 164.0
 offset_top = 645.0
 offset_right = 982.0
-offset_bottom = 1758.0
+offset_bottom = 1851.0
 text = "CREATORS:
 Mohammed Fawzan
 Muhammad Azaan
@@ -725,6 +742,9 @@ SFX AND PARTICLES:
  Kenny.nl
  GodotAcademy.io
 
+PACO:
+Paco :3
+
 And Lastly,
 thank YOU for playing
 (and watching these credits!)
@@ -735,6 +755,17 @@ horizontal_alignment = 1
 [node name="creditsAnim" type="AnimationPlayer" parent="." unique_id=147629301]
 libraries/ = SubResource("AnimationLibrary_m63oq")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=653774747]
+z_index = 4
+texture_filter = 2
+position = Vector2(918, 273)
+emitting = false
+amount = 24
+texture = ExtResource("94_j2xhi")
+lifetime = 1.64
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mqypj")
+
 [connection signal="mouse_entered" from="startBtn" to="." method="_on_start_btn_mouse_entered"]
 [connection signal="mouse_exited" from="startBtn" to="." method="_on_start_btn_mouse_exited"]
 [connection signal="pressed" from="startBtn" to="." method="_on_texture_button_pressed"]
@@ -744,3 +775,4 @@ libraries/ = SubResource("AnimationLibrary_m63oq")
 [connection signal="mouse_entered" from="quitBtn" to="." method="_on_quit_btn_mouse_entered"]
 [connection signal="mouse_exited" from="quitBtn" to="." method="_on_quit_btn_mouse_exited"]
 [connection signal="pressed" from="quitBtn" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="icon" to="." method="_on_icon_pressed"]

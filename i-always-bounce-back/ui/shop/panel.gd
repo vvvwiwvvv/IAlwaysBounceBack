@@ -1,12 +1,7 @@
-# CODE FOR CAMERA, SOME 3D MODELS SUCH AS BAT, CAMERA CODE: GDquest
-# 3D MODELS: SKETCHFAB
-# BOUNCING BALL / CHARGING AND PARTICLES: Kenny.nl AND GodotAcademy.io
-
-extends Panel
-
+extends Node
 class_name upgradebox
 
-@export_enum("Speed", "Damage", "Bounce") var sell := 0
+@export_enum("Health", "Speed", "Damage", "Cooldown") var sell := 0
 
 var price := 0
 var game: Node
@@ -23,7 +18,7 @@ func setup(owner_game: Node) -> void:
 func refresh() -> void:
 	if game == null:
 		return
-	var titles := ["SPEED", "ATTACK", "CHARGE FORCE"]
+	var titles := ["HEALTH", "SPEED", "ATTACK", "CHARGE COOLDOWN"]
 	price = game.upgrade_cost(sell)
 	name_label.text = titles[sell]
 	level_label.text = "LV %d   %s" % [int(game.levels[sell]), game.stat_text(sell)]
