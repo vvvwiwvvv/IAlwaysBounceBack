@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nb36yeuoscu"
-path="res://.godot/imported/upgradeicons3.png-dc5a6a1e5289f99c24068550b8b39dc5.ctex"
+uid="uid://cxni776rn2k35"
+path="res://.godot/imported/hand.png-ed3622cbe1b17ac5bd36946b99a3b7ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/shop/upgradeicons3.png"
-dest_files=["res://.godot/imported/upgradeicons3.png-dc5a6a1e5289f99c24068550b8b39dc5.ctex"]
+source_file="res://ui/hand.png"
+dest_files=["res://.godot/imported/hand.png-ed3622cbe1b17ac5bd36946b99a3b7ca.ctex"]
 
 [params]
 

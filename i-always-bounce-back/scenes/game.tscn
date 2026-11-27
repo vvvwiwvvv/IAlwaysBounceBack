@@ -12,19 +12,37 @@
 [ext_resource type="AudioStream" uid="uid://07ta866kc5ij" path="res://audio/goblin_death.mp3" id="10"]
 [ext_resource type="AudioStream" uid="uid://dxj8g0rxihxkd" path="res://audio/bat_death.mp3" id="11"]
 [ext_resource type="Script" uid="uid://crn0m8mnar80r" path="res://scripts/hud.gd" id="12"]
+[ext_resource type="AudioStream" uid="uid://dnhe2svw1m78c" path="res://audio/parry.mp3" id="12_js0lu"]
 [ext_resource type="Script" uid="uid://d0vvjqioycav8" path="res://scripts/minimap.gd" id="13_e1j6l"]
-[ext_resource type="Texture2D" uid="uid://2ckc3kcdolwr" path="res://ui/minimap/dot.png" id="14_pl11u"]
+[ext_resource type="Texture2D" uid="uid://byd1oosn026to" path="res://ui/minimap/dot.png" id="14_pl11u"]
+[ext_resource type="Texture2D" uid="uid://2ckc3kcdolwr" path="res://ui/minimap/dot_boss.png" id="14_v2yb1"]
 [ext_resource type="Texture2D" uid="uid://b2u43gaoqkcge" path="res://ui/stats/kills.png" id="16"]
 [ext_resource type="Texture2D" uid="uid://dogdilwaax1tc" path="res://ui/health/grey.png" id="17"]
+[ext_resource type="Shader" uid="uid://cphwwv8yj8h4t" path="res://shaders/menu.gdshader" id="17_gxtfn"]
 [ext_resource type="Texture2D" uid="uid://7gq8ugoy6ur" path="res://ui/health/under.png" id="18"]
 [ext_resource type="Texture2D" uid="uid://bie048uh3huc7" path="res://ui/health/empty.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://q1ie62h0c8w5" path="res://ui/inventory.png" id="19_5newe"]
 [ext_resource type="Script" uid="uid://2qej4srgq01t" path="res://scripts/inventory.gd" id="19_37s47"]
 [ext_resource type="Script" uid="uid://cp8aosndlhssx" path="res://ui/health/hpbar.gd" id="20"]
 [ext_resource type="Texture2D" uid="uid://dgm7tcsrxvkw5" path="res://ui/portrait.png" id="21"]
+[ext_resource type="FontFile" uid="uid://dc0q4wb3hfdey" path="res://PixelPurl.ttf" id="21_bhx41"]
+[ext_resource type="Script" uid="uid://c0p7ad5pyevqs" path="res://scripts/style.gd" id="21_wljb1"]
 [ext_resource type="Script" uid="uid://cpic723f5p3bt" path="res://scripts/shop.gd" id="22"]
 [ext_resource type="PackedScene" uid="uid://crhko48p6p874" path="res://ui/shop/shoppanel.tscn" id="23"]
 [ext_resource type="Script" uid="uid://cplg3ifk7fb00" path="res://scripts/chest.gd" id="23_bt5mj"]
+[ext_resource type="PackedScene" uid="uid://cd6i7cbriohry" path="res://ui/shop/chestpanel.tscn" id="27_qnb83"]
+[ext_resource type="Script" uid="uid://b1v1k0tp25a4l" path="res://scripts/game_over.gd" id="28_qouja"]
+[ext_resource type="Texture2D" uid="uid://ctojjl0kbn4j8" path="res://ui/overBtn.png" id="33_gxtfn"]
+[ext_resource type="Texture2D" uid="uid://b7jrhjyg3ixmr" path="res://ui/hand1.png" id="33_nepv3"]
+[ext_resource type="Texture2D" uid="uid://d06edw2vt2d72" path="res://ui/clock1.png" id="34_nepv3"]
+[ext_resource type="Texture2D" uid="uid://cyn75p8njcn3o" path="res://ui/overBtnPressed.png" id="34_twgab"]
+[ext_resource type="Texture2D" uid="uid://bdvcoefunro1p" path="res://ui/overBtnHover.png" id="35_02fa5"]
+[ext_resource type="Texture2D" uid="uid://cxni776rn2k35" path="res://ui/hand.png" id="36_nepv3"]
+[ext_resource type="PackedScene" uid="uid://btgth1wtctld5" path="res://scenes/damage_numbers.tscn" id="40_m4url"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twgab"]
+shader = ExtResource("17_gxtfn")
+shader_parameter/opa = 1.0
 
 [sub_resource type="StyleBoxFlat" id="charge_back"]
 bg_color = Color(0.08, 0.1, 0.16, 0.85)
@@ -53,12 +71,40 @@ corner_radius_bottom_right = 56
 corner_radius_bottom_left = 56
 corner_detail = 16
 
+[sub_resource type="LabelSettings" id="LabelSettings_wq7lk"]
+font = ExtResource("21_bhx41")
+font_size = 42
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0.18039216, 0.18039216, 0.18039216, 0.38039216)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v2yb1"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_js0lu"]
+font = ExtResource("21_bhx41")
+font_size = 42
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0.18039216, 0.18039216, 0.18039216, 0.38039216)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wq7lk"]
 texture = ExtResource("19_5newe")
 
 [sub_resource type="LabelSettings" id="LabelSettings_37s47"]
-font_size = 28
-font_color = Color(0.5058824, 0.6039216, 0.654902, 1)
+font_size = 50
+font_color = Color(0.3174, 0.41009, 0.46, 1)
+shadow_color = Color(0.67507905, 0.68789625, 0.79358315, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_twgab"]
+font_size = 81
+
+[sub_resource type="LabelSettings" id="LabelSettings_gxtfn"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0.08707369, 0.23574752, 0.29792252, 1)
 
 [node name="Game" type="Node" unique_id=1181334870]
 process_mode = 3
@@ -104,11 +150,15 @@ volume_db = -8.0
 pitch_scale = 1.7
 max_polyphony = 3
 
+[node name="SfxParry" type="AudioStreamPlayer" parent="." unique_id=227679159]
+stream = ExtResource("12_js0lu")
+max_polyphony = 9
+
 [node name="Minimap" type="CanvasLayer" parent="." unique_id=1697957210]
 layer = 2
 
 [node name="Minimap" type="Control" parent="Minimap" unique_id=1536074165]
-z_index = 6
+z_index = 4
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
@@ -119,11 +169,39 @@ offset_bottom = 41.0
 scale = Vector2(3.1811101, 3.1811101)
 script = ExtResource("13_e1j6l")
 dot = ExtResource("14_pl11u")
-boss_dot = ExtResource("14_pl11u")
+boss_dot = ExtResource("14_v2yb1")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1688158943]
 process_mode = 3
 script = ExtResource("12")
+
+[node name="ColorRect" type="ColorRect" parent="HUD" unique_id=678975615]
+visible = false
+z_index = 8
+offset_left = -6.1035156e-05
+offset_top = -3.0517578e-05
+offset_right = 39.99994
+offset_bottom = 39.99997
+scale = Vector2(28.746017, 28.746017)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="vignette" type="ColorRect" parent="HUD" unique_id=250369459]
+material = SubResource("ShaderMaterial_twgab")
+offset_top = -4.9999695
+offset_right = 40.0
+offset_bottom = 35.00003
+scale = Vector2(28.718868, 16.364082)
+mouse_filter = 2
+
+[node name="Parry" type="ColorRect" parent="HUD" unique_id=1652859427]
+visible = false
+offset_left = -23.000002
+offset_top = -22.0
+offset_right = 23.218199
+offset_bottom = -7.254196
+scale = Vector2(26.669142, 47.711823)
+color = Color(1, 1, 1, 0.10980392)
 
 [node name="Root" type="Control" parent="HUD" unique_id=2002183708]
 layout_mode = 3
@@ -166,8 +244,10 @@ horizontal_alignment = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 128.0
-offset_bottom = 164.0
+offset_left = -2.0
+offset_top = 151.0
+offset_right = -2.0
+offset_bottom = 187.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -179,14 +259,16 @@ horizontal_alignment = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 172.0
-offset_bottom = 208.0
+offset_left = -2.0
+offset_top = 119.0
+offset_right = -2.0
+offset_bottom = 155.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.8, 0.95, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 34
-text = "HOLD RIGHT CLICK TO BOUNCE AGAIN"
+text = "HOLD LEFT CLICK TO BOUNCE AGAIN"
 horizontal_alignment = 1
 
 [node name="BottomLeft" type="Control" parent="HUD/Root" unique_id=963798632]
@@ -247,6 +329,7 @@ offset_bottom = 196.0
 theme_override_styles/panel = SubResource("portrait_frame")
 
 [node name="Portrait" type="TextureRect" parent="HUD/Root/BottomLeft/PortraitFrame" unique_id=870764269]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -263,19 +346,19 @@ stretch_mode = 6
 
 [node name="KillsIcon" type="TextureRect" parent="HUD/Root/BottomLeft" unique_id=643876582]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 56.0
-offset_right = 161.0
-offset_bottom = 100.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 45.0
+offset_bottom = 43.0
 texture = ExtResource("16")
 expand_mode = 1
 
 [node name="KillsLabel" type="Label" parent="HUD/Root/BottomLeft" unique_id=926175683]
 layout_mode = 0
-offset_left = 167.0
-offset_top = 65.0
-offset_right = 239.0
-offset_bottom = 99.0
+offset_left = 51.0
+offset_top = 8.0
+offset_right = 123.0
+offset_bottom = 42.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 34
@@ -283,10 +366,10 @@ text = "0"
 
 [node name="PointsLabel" type="Label" parent="HUD/Root/BottomLeft" unique_id=284479474]
 layout_mode = 0
-offset_left = 256.0
-offset_top = 67.0
-offset_right = 410.0
-offset_bottom = 101.0
+offset_left = 11.0
+offset_top = 43.0
+offset_right = 165.0
+offset_bottom = 77.0
 theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -312,6 +395,63 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="Style" type="Control" parent="HUD/Root" unique_id=1661685401]
+z_index = 1
+anchors_preset = 0
+offset_left = 909.0
+offset_top = 141.0
+offset_right = 949.0
+offset_bottom = 181.0
+scale = Vector2(1.142724, 1.2943939)
+script = ExtResource("21_wljb1")
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Root/Style" unique_id=1714438600]
+layout_mode = 0
+offset_left = -1.0281982
+offset_top = 0.90766907
+offset_right = 45.190002
+offset_bottom = 15.653473
+scale = Vector2(4.5436664, 4.5436664)
+color = Color(0.19607843, 0.19607843, 0.19607843, 0.4392157)
+
+[node name="BounceLabel" type="Label" parent="HUD/Root/Style" unique_id=706414013]
+layout_mode = 0
+offset_left = 32.37877
+offset_top = 18.541494
+offset_right = 266.37875
+offset_bottom = 54.541496
+scale = Vector2(0.64305353, 0.64305353)
+text = "(0)"
+label_settings = SubResource("LabelSettings_wq7lk")
+
+[node name="StyleLabel" type="Label" parent="HUD/Root/Style" unique_id=803739038]
+layout_mode = 0
+offset_left = 5.2506065
+offset_top = 50.216557
+offset_right = 239.25061
+offset_bottom = 86.21655
+scale = Vector2(0.39004117, 0.39004117)
+text = "STYLE: 100x1=100"
+label_settings = SubResource("LabelSettings_wq7lk")
+
+[node name="PopupLbael" type="Label" parent="HUD/Root/Style" unique_id=474495378]
+layout_mode = 0
+offset_left = 64.75755
+offset_top = 14.678681
+offset_right = 163.75754
+offset_bottom = 40.67868
+scale = Vector2(0.93857676, 0.93857676)
+label_settings = SubResource("LabelSettings_v2yb1")
+
+[node name="RankLabel" type="Label" parent="HUD/Root/Style" unique_id=151026933]
+layout_mode = 0
+offset_left = 7.000828
+offset_top = 4.635372
+offset_right = 47.000828
+offset_bottom = 40.635372
+scale = Vector2(1.2553631, 1.2553631)
+label_settings = SubResource("LabelSettings_js0lu")
 
 [node name="Inventory" type="CanvasLayer" parent="." unique_id=604813335]
 script = ExtResource("19_37s47")
@@ -352,6 +492,7 @@ offset_left = 295.54788
 offset_top = 20.907349
 offset_right = 447.54788
 offset_bottom = 129.90735
+scale = Vector2(0.5922686, 0.5922686)
 text = "TIME: 
 LEVEL: 
 ENEMIES LEFT: 
@@ -363,10 +504,10 @@ label_settings = SubResource("LabelSettings_37s47")
 [node name="wave" type="Label" parent="Inventory/Control/Panel/info" unique_id=707178794]
 texture_filter = 1
 layout_mode = 0
-offset_left = 143.7
-offset_top = 82.67898
-offset_right = 295.7
-offset_bottom = 191.679
+offset_left = 262.63675
+offset_top = 142.80627
+offset_right = 414.63678
+offset_bottom = 251.8063
 text = "0
 "
 label_settings = SubResource("LabelSettings_37s47")
@@ -374,39 +515,40 @@ label_settings = SubResource("LabelSettings_37s47")
 [node name="time" type="Label" parent="Inventory/Control/Panel/info" unique_id=1510359642]
 texture_filter = 1
 layout_mode = 0
-offset_left = 142.21855
-offset_right = 294.21857
-offset_bottom = 109.000015
+offset_left = 265.1381
+offset_top = -3.2091289
+offset_right = 417.13812
+offset_bottom = 105.790886
 text = "00:00:00"
 label_settings = SubResource("LabelSettings_37s47")
 
 [node name="lname" type="Label" parent="Inventory/Control/Panel/info" unique_id=707497198]
 texture_filter = 1
 layout_mode = 0
-offset_left = 142.95926
-offset_top = 27.55964
-offset_right = 294.95926
-offset_bottom = 136.55965
+offset_left = 265.13806
+offset_top = 48.136925
+offset_right = 417.13806
+offset_bottom = 157.13693
 text = "FOREST"
 label_settings = SubResource("LabelSettings_37s47")
 
 [node name="kills" type="Label" parent="Inventory/Control/Panel/info" unique_id=876655984]
 texture_filter = 1
 layout_mode = 0
-offset_left = 143.69995
-offset_top = 112.13934
-offset_right = 295.69995
-offset_bottom = 221.13934
+offset_left = 262.63678
+offset_top = 192.54776
+offset_right = 414.63678
+offset_bottom = 301.54776
 text = "0"
 label_settings = SubResource("LabelSettings_37s47")
 
 [node name="enemies" type="Label" parent="Inventory/Control/Panel/info" unique_id=1962329886]
 texture_filter = 1
 layout_mode = 0
-offset_left = 143.69998
-offset_top = 56.06967
-offset_right = 295.69998
-offset_bottom = 165.06967
+offset_left = 262.63675
+offset_top = 91.46019
+offset_right = 414.63675
+offset_bottom = 200.46019
 text = "0"
 label_settings = SubResource("LabelSettings_37s47")
 
@@ -417,21 +559,22 @@ offset_left = 12.592262
 offset_top = 19.957092
 offset_right = 201.59225
 offset_bottom = 184.95709
+scale = Vector2(0.5922686, 0.5922686)
 text = "STATS
 POINTS: 
 HEALTH: 
 SPEED: 
-COOLDOWN: 
+STYLE: 
 DAMAGE: "
 label_settings = SubResource("LabelSettings_37s47")
 
 [node name="points" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1148267266]
 texture_filter = 1
 layout_mode = 0
-offset_left = 114.071106
-offset_top = 28.509901
-offset_right = 303.0711
-offset_bottom = 193.50989
+offset_left = 213.86139
+offset_top = 44.927597
+offset_right = 402.8614
+offset_bottom = 209.92758
 text = "0
 "
 label_settings = SubResource("LabelSettings_37s47")
@@ -439,20 +582,20 @@ label_settings = SubResource("LabelSettings_37s47")
 [node name="health" type="Label" parent="Inventory/Control/Panel/stats" unique_id=2016410391]
 texture_filter = 1
 layout_mode = 0
-offset_left = 114.811844
-offset_top = 56.06952
-offset_right = 303.81183
-offset_bottom = 221.06952
+offset_left = 212.61073
+offset_top = 85.04168
+offset_right = 401.61072
+offset_bottom = 250.04169
 text = "100/100"
 label_settings = SubResource("LabelSettings_37s47")
 
 [node name="speed" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1087217797]
 texture_filter = 1
 layout_mode = 0
-offset_left = 114.811844
-offset_top = 83.62921
-offset_right = 303.81183
-offset_bottom = 248.62921
+offset_left = 213.86139
+offset_top = 136.3878
+offset_right = 402.8614
+offset_bottom = 301.38782
 text = "0
 "
 label_settings = SubResource("LabelSettings_37s47")
@@ -460,20 +603,22 @@ label_settings = SubResource("LabelSettings_37s47")
 [node name="cooldown" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1247999540]
 texture_filter = 1
 layout_mode = 0
-offset_left = 114.811844
-offset_top = 112.13916
-offset_right = 303.81183
-offset_bottom = 277.13916
+offset_left = 215.11203
+offset_top = 189.33846
+offset_right = 452.73578
+offset_bottom = 233.33846
 text = "0"
 label_settings = SubResource("LabelSettings_37s47")
+clip_text = true
+text_overrun_behavior = 5
 
 [node name="damage" type="Label" parent="Inventory/Control/Panel/stats" unique_id=1600174887]
 texture_filter = 1
 layout_mode = 0
-offset_left = 115.55256
-offset_top = 139.69885
-offset_right = 304.55258
-offset_bottom = 304.69885
+offset_left = 215.112
+offset_top = 234.2662
+offset_right = 404.11203
+offset_bottom = 399.2662
 text = "0"
 label_settings = SubResource("LabelSettings_37s47")
 
@@ -484,6 +629,7 @@ offset_left = 14.073708
 offset_top = 203.37128
 offset_right = 74.073715
 offset_bottom = 228.37128
+scale = Vector2(0.5922686, 0.5922686)
 text = "ITEMS:"
 label_settings = SubResource("LabelSettings_37s47")
 
@@ -494,16 +640,93 @@ offset_left = 291.84427
 offset_top = 332.61658
 offset_right = 635.84424
 offset_bottom = 469.61658
+scale = Vector2(0.5922686, 0.5922686)
 text = "CONTROLS
-WASD - Move      Q - Ability
-LMB - Dash        
-TAB - Inventory
+WASD - Move    Q - Ability
+LMB - Dash      LMB - Parry
+TAB - Inventory  B - Shop
 "
 label_settings = SubResource("LabelSettings_37s47")
+
+[node name="Chest" type="CanvasLayer" parent="." unique_id=1385068130]
+process_mode = 3
+layer = 5
+visible = false
+script = ExtResource("23_bt5mj")
+
+[node name="Root" type="Control" parent="Chest" unique_id=1437021978]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Chest/Root" unique_id=1160492710]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.04, 0.08, 0.72)
+
+[node name="Title" type="Label" parent="Chest/Root" unique_id=687001280]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.08, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 72
+text = "CHEST"
+horizontal_alignment = 1
+
+[node name="Points" type="Label" parent="Chest/Root" unique_id=1886543153]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 132.0
+offset_bottom = 168.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
+theme_override_font_sizes/font_size = 36
+text = "CHOOSE ONE"
+horizontal_alignment = 1
+
+[node name="Panels" type="Control" parent="Chest/Root" unique_id=637724926]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = -1.0
+offset_right = 43.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel3" parent="Chest/Root/Panels" unique_id=953287694 instance=ExtResource("27_qnb83")]
+position = Vector2(-542, -164.99998)
+scale = Vector2(2.9831803, 2.9831803)
+
+[node name="Panel2" parent="Chest/Root/Panels" unique_id=1087926696 instance=ExtResource("27_qnb83")]
+position = Vector2(-200.00009, -165.00002)
+scale = Vector2(2.9831803, 2.9831803)
+
+[node name="Panel" parent="Chest/Root/Panels" unique_id=1483189027 instance=ExtResource("27_qnb83")]
+position = Vector2(129.99991, -165.00002)
+scale = Vector2(2.9831803, 2.9831803)
 
 [node name="Shop" type="CanvasLayer" parent="." unique_id=1124372180]
 process_mode = 3
 layer = 5
+visible = false
 script = ExtResource("22")
 
 [node name="Root" type="Control" parent="Shop" unique_id=1119620166]
@@ -590,86 +813,126 @@ sell = 1
 position = Vector2(17, -149.00002)
 sell = 2
 
-[node name="Chest" type="CanvasLayer" parent="." unique_id=1385068130]
-process_mode = 3
-layer = 5
+[node name="GameOver" type="CanvasLayer" parent="." unique_id=1291677961]
+layer = 4
 visible = false
-script = ExtResource("23_bt5mj")
+script = ExtResource("28_qouja")
 
-[node name="Root" type="Control" parent="Chest" unique_id=1437021978]
+[node name="Root" type="Control" parent="GameOver" unique_id=333351333]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Dim" type="ColorRect" parent="Chest/Root" unique_id=1160492710]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.03, 0.04, 0.08, 0.72)
+[node name="hand2" type="Sprite2D" parent="GameOver/Root" unique_id=1272380641]
+texture_filter = 1
+position = Vector2(576, 322)
+scale = Vector2(2.564265, 2.564265)
+texture = ExtResource("36_nepv3")
 
-[node name="Title" type="Label" parent="Chest/Root" unique_id=687001280]
+[node name="Timer" type="Timer" parent="GameOver/Root/hand2" unique_id=334925286]
+
+[node name="hand" type="Sprite2D" parent="GameOver/Root" unique_id=1198137990]
+texture_filter = 1
+position = Vector2(576, 322.00003)
+scale = Vector2(2.5575337, 2.5575337)
+texture = ExtResource("33_nepv3")
+
+[node name="clock" type="Sprite2D" parent="GameOver/Root" unique_id=1288020350]
+texture_filter = 1
+position = Vector2(574.99994, 324)
+scale = Vector2(2.5664358, 2.5664358)
+texture = ExtResource("34_nepv3")
+
+[node name="Title" type="Label" parent="GameOver/Root" unique_id=1834357420]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 60.0
-offset_bottom = 130.0
+offset_left = 411.0
+offset_top = 202.0
+offset_right = 675.0
+offset_bottom = 272.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
 theme_override_colors/font_outline_color = Color(0.2, 0.08, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 72
-text = "SHOP"
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_twgab")
 horizontal_alignment = 1
 
-[node name="Points" type="Label" parent="Chest/Root" unique_id=1886543153]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 132.0
-offset_bottom = 168.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(1, 0.86, 0.35, 1)
-theme_override_font_sizes/font_size = 36
-text = "POINTS  0"
-horizontal_alignment = 1
+[node name="startagain" type="TextureButton" parent="GameOver/Root" unique_id=2006133923]
+texture_filter = 1
+layout_mode = 0
+offset_left = 295.0
+offset_top = 337.0
+offset_right = 406.0
+offset_bottom = 388.0
+scale = Vector2(2.3091905, 2.3091905)
+texture_normal = ExtResource("33_gxtfn")
+texture_pressed = ExtResource("34_twgab")
+texture_hover = ExtResource("35_02fa5")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="Close" type="Label" parent="Chest/Root" unique_id=256630499]
+[node name="Label" type="Label" parent="GameOver/Root/startagain" unique_id=378816021]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -90.0
-offset_bottom = -54.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "Press B to close and continue"
-horizontal_alignment = 1
-
-[node name="Panels" type="Control" parent="Chest/Root" unique_id=637724926]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+text = "START AGAIN"
+label_settings = SubResource("LabelSettings_gxtfn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="pane1" parent="Chest/Root/Panels" unique_id=1255646926 instance=ExtResource("23")]
-position = Vector2(-451.00003, -155.00002)
+[node name="giveup" type="TextureButton" parent="GameOver/Root" unique_id=254458606]
+texture_filter = 1
+layout_mode = 0
+offset_left = 611.0
+offset_top = 346.99997
+offset_right = 722.0
+offset_bottom = 397.99997
+scale = Vector2(1.96226, 1.96226)
+texture_normal = ExtResource("33_gxtfn")
+texture_pressed = ExtResource("34_twgab")
+texture_hover = ExtResource("35_02fa5")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="pane2" parent="Chest/Root/Panels" unique_id=658215633 instance=ExtResource("23")]
-position = Vector2(-125.99999, -152.99998)
-sell = 1
+[node name="Label" type="Label" parent="GameOver/Root/giveup" unique_id=1133253424]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GIVE UP"
+label_settings = SubResource("LabelSettings_gxtfn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="pane3" parent="Chest/Root/Panels" unique_id=1325636730 instance=ExtResource("23")]
-position = Vector2(201.99998, -149.00002)
-sell = 2
+[node name="Timer" type="Timer" parent="GameOver/Root" unique_id=1930811109]
+
+[node name="Dim" type="ColorRect" parent="GameOver" unique_id=1713063867]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(28.816158, 28.816158)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameOver" unique_id=1126332426]
+volume_db = -80.0
+
+[node name="Label3D" parent="." unique_id=1173358603 instance=ExtResource("40_m4url")]
+
+[connection signal="pressed" from="GameOver/Root/startagain" to="GameOver" method="_on_startagain_pressed"]
+[connection signal="pressed" from="GameOver/Root/giveup" to="GameOver" method="_on_giveup_pressed"]
+[connection signal="timeout" from="GameOver/Root/Timer" to="GameOver" method="_on_timer_timeout"]
+
+[editable path="Shop/Root/Panels/pane4"]

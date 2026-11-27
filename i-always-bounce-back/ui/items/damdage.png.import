@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1wbnhdc8us8c"
-path="res://.godot/imported/upgradeicons2.png-c465c779cfddf9fa09bbed768fcb6ef2.ctex"
+uid="uid://bsatlaeyjxwwl"
+path="res://.godot/imported/damdage.png-efd922d5b513e38c86a8144549591ad9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/shop/upgradeicons2.png"
-dest_files=["res://.godot/imported/upgradeicons2.png-c465c779cfddf9fa09bbed768fcb6ef2.ctex"]
+source_file="res://ui/items/damdage.png"
+dest_files=["res://.godot/imported/damdage.png-efd922d5b513e38c86a8144549591ad9.ctex"]
 
 [params]
 

@@ -8,17 +8,20 @@ signal enemy_hit(enemy: Node, killed: bool)
 
 @export_group("Physics")
 @export var radius := 0.5
-@export var enemy_restitution := 0.9
+
+@export var max_bounces := 3
+@export var max_flight  := 7.0
+@export var restitution  := 0.72
+@export var gravity  := 14.0
+@export var enemy_restitution  := 0.9
+
 @export var enemy_pop := 5.0
 @export var hover_damping := 5.0
-@export var gravity := 14.0
 @export var thrust_acceleration := 3.0
 @export var thrust_time := 0.35
-@export var restitution := 0.72
 @export var surface_friction := 0.18
 @export var impact_threshold := 0.8
 @export var bounce_cooldown := 0.06
-@export var max_bounces := 3
 @export var max_flight_time := 7.0
 @export var rest_speed := 0.6
 @export var rest_time := 0.5

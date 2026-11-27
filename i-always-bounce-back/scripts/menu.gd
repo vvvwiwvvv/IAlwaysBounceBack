@@ -17,10 +17,12 @@ const MUSIC := "res://audio/music.mp3"
 var incredits = 0
 
 func _ready() -> void:
+	
 	rect.color = Color(0, 0, 0, 1) 
-	rect.modulate.a = 0.0  
 	rect2.color = Color(0, 0, 0, 1) 
-	rect2.modulate.a = 0.0  
+	
+	fade(rect,0.0,0.5)
+	fade(rect2,0.0,0.5)
 	get_tree().paused = false
 	Engine.time_scale = 1.0
 	Engine.physics_ticks_per_second = 60
@@ -79,30 +81,29 @@ func sound(stream: AudioStream) -> void:
 	player.play()
 	
 
-func fade(r: ColorRect, duration: float = 1.0) -> void:
-	var tween := create_tween()
-	tween.tween_property(r, "modulate:a", 1.0, duration)
-	await tween.finished 
+func fade(r: ColorRect, val:float = 1,duration: float = 1.0) -> void:
+	await create_tween().tween_property(r, "modulate:a", val, duration).finished
 	
 func _on_texture_button_pressed() -> void: #start
 	sound(s2)
 	glide_hover($icon, Vector2(415,160), 0.5)
-	await fade(rect,0.5)
+	await fade(rect,1,0.75)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_texture_button_2_pressed() -> void: #quit
 	sound(s2)
 	glide_hover($icon, Vector2(415,160), 0.5)
-	await fade(rect,0.75)
-	await fade(rect2,0.75)
+	await fade(rect,1,0.75)
+	await fade(rect2,1,0.75)
 	get_tree().quit()
 
-@onready var moveables: Array[Node]= [$startBtn,$quitBtn,$creditsBtn,$icon,$title,$hoverBtn,]
+@onready var moveables: Array[Node]= [$startBtn,$quitBtn,$creditsBtn,$icon,$title,$hoverBtn]
 func _on_texture_button_3_pressed() -> void: #credits
 	sound(s2)
 	creditplayer.play("move")
 	titleplayer.pause()
 	credits.release_focus()
+	create_tween().tween_property($vignette.material, "shader_parameter/opa", 0.0, 1.0)
 	glide_to(help, Vector2(0,-30),0.1)
 	incredits = 1
 	for child in get_children():
@@ -118,6 +119,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var key: bool = event is InputEventKey and event.pressed
 	var click: bool = event is InputEventMouseButton and event.pressed
 	if (key or click) and incredits == 2:
+		create_tween().tween_property($vignette.material, "shader_parameter/opa", 1.0, 1.0) #tween vignette parameters
 		sound(s2)
 		incredits = 0
 		creditplayer.stop()

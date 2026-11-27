@@ -1,6 +1,6 @@
 extends CanvasLayer
 var _game: Node
-var _tween: Tween
+var tween: Tween
 
 @onready var panel = $Control/Panel
 @onready var bg = $Control/Dim
@@ -24,24 +24,24 @@ func _ready() -> void:
 
 
 func _on_inventory_toggled(open: bool) -> void:
-	_tween=create_tween().set_parallel(true)
+	tween=create_tween().set_parallel(true)
 	visible = open
 	if open:
 		refresh()
-		_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		_tween.tween_property(panel,"position", Vector2(131,20),0.3)
-		_tween.tween_property(panel, "scale", Vector2(1.678,1.308), 0.3)
-		_tween.tween_property(map,"position", Vector2(742,238),0.3)
-		_tween.tween_property(map, "scale", Vector2(5,5), 0.3)
-		_tween.tween_property(bg,"modulate:a", 0.4,  0.3)
+		tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(panel,"position", Vector2(131,20),0.3)
+		tween.tween_property(panel, "scale", Vector2(1.678,1.308), 0.3)
+		tween.tween_property(map,"position", Vector2(742,238),0.3)
+		tween.tween_property(map, "scale", Vector2(5,5), 0.3)
+		tween.tween_property(bg,"modulate:a", 0.4,  0.3)
 	else:
-		_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-		_tween.tween_property(panel, "position", Vector2(169.0,660.0),0.2)
-		_tween.tween_property(panel, "scale", Vector2(0.2, 0.2),0.2)
-		_tween.tween_property(map, "scale", Vector2(3.181,3.181), 0.3)
-		_tween.tween_property(map,"position", Vector2(1023,1),0.3)
+		tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tween.tween_property(panel, "position", Vector2(169.0,660.0),0.2)
+		tween.tween_property(panel, "scale", Vector2(0.2, 0.2),0.2)
+		tween.tween_property(map, "scale", Vector2(3.181,3.181), 0.3)
+		tween.tween_property(map,"position", Vector2(1023,1),0.3)
 		
-		_tween.tween_property(bg, "modulate:a", 0.0 ,0.2)
+		tween.tween_property(bg, "modulate:a", 0.0 ,0.2)
 
 
 

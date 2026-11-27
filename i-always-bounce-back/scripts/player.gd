@@ -11,7 +11,6 @@ const CLIPS := {
 	"roll": "res://player/roll.fbx",
 	"slash": "res://player/slash.fbx",
 }
-
 @export var target_height := 1.75
 @export var boost := 1.15
 @export var acceleration := 7.0
@@ -163,6 +162,7 @@ func _build_animations() -> void:
 			node.start_offset = jump_start
 			node.timeline_length = jump_len - jump_start
 			node.stretch_time_scale = false
+
 		bt.add_node(clip, node)
 	bt.add_node("run_scale", AnimationNodeTimeScale.new())
 	bt.add_node("move", AnimationNodeBlend2.new())

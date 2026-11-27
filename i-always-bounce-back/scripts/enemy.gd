@@ -104,19 +104,24 @@ func scale_for_wave(wave: int) -> void:
 	move_speed *= minf(1.0 + 0.03 * float(wave - 1), 1.5)
 
 
-func take_hit(amount: float, impulse: Vector3) -> bool:
+func take_hit(amount: float, impulse: Vector3, force: float = 5) -> bool: #added force mult for parry default so nothing breaks
 	if dead or _hurt_timer > 0.0:
 		return false
 	_hurt_timer = hit_invulnerability
 	_flash_timer = 0.15
 	health -= amount
+	game.damage_numbers(self,amount)
+	
 	var push := Vector3(impulse.x, 0.0, impulse.z)
 	if push.length() > 0.1:
-		velocity += push.normalized() * 5.0
+		velocity += push.normalized() * force
 	if health <= 0.0:
 		_die()
 		return true
 	return false
+
+
+
 
 
 func _die() -> void:
@@ -128,7 +133,7 @@ func _die() -> void:
 		var length := _animation.get_animation(death_animation).length
 		_animation.play(death_animation, 0.05, length / maxf(death_time, 0.05))
 	died.emit(self)
-	if randf() < 0.01:
+	if randf() < 1:#0.05:
 		print()
 
 

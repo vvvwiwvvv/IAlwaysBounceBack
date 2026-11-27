@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bxtitbg0dv4v1" path="res://ui/title.png" id="3_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://dl7tc5ib0ygj1" path="res://ui/menuButtonHover.png" id="3_v86rl"]
 [ext_resource type="FontFile" uid="uid://dc0q4wb3hfdey" path="res://PixelPurl.ttf" id="5_i6lef"]
+[ext_resource type="Shader" uid="uid://cphwwv8yj8h4t" path="res://shaders/menu.gdshader" id="8_m63oq"]
 [ext_resource type="Texture2D" uid="uid://b3d0vrge3x68i" path="res://ui/menu/menu1.png" id="8_umjhq"]
 [ext_resource type="Texture2D" uid="uid://duujbsik8kxbh" path="res://ui/menu/menu2.png" id="9_3qq8w"]
 [ext_resource type="Texture2D" uid="uid://xju1454xk7b6" path="res://ui/menu/menu3.png" id="10_13ief"]
@@ -310,6 +311,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1j7n"]
+shader = ExtResource("8_m63oq")
+shader_parameter/opa = 1.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_mqypj"]
 animations = [{
 "frames": [{
@@ -555,8 +560,6 @@ offset_bottom = 679.0
 text = "PRESS ANY BUTTON TO EXIT"
 label_settings = SubResource("LabelSettings_mqypj")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=214823036]
-
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=382515524]
 z_index = 5
 layout_mode = 1
@@ -678,7 +681,7 @@ texture_filter = 1
 layout_mode = 0
 offset_top = -5.0
 offset_right = 735.0
-offset_bottom = 71.0
+offset_bottom = 71.00001
 scale = Vector2(1.6824596, 1.6716018)
 texture = ExtResource("3_4ytvr")
 expand_mode = 1
@@ -691,6 +694,15 @@ scale = Vector2(2.7457564, 2.9742339)
 sprite_frames = SubResource("SpriteFrames_wq7lk")
 autoplay = "default"
 frame_progress = 0.89205015
+
+[node name="vignette" type="ColorRect" parent="." unique_id=125083482]
+material = SubResource("ShaderMaterial_e1j7n")
+layout_mode = 0
+offset_top = -4.9999695
+offset_right = 40.0
+offset_bottom = 35.00003
+scale = Vector2(28.718868, 16.364082)
+mouse_filter = 2
 
 [node name="hoverBtn" type="AnimatedSprite2D" parent="." unique_id=584679494]
 texture_filter = 1
@@ -709,7 +721,7 @@ layout_mode = 0
 offset_left = 164.0
 offset_top = 645.0
 offset_right = 982.0
-offset_bottom = 1851.0
+offset_bottom = 1913.0
 text = "CREATORS:
 Mohammed Fawzan
 Muhammad Azaan
@@ -729,14 +741,16 @@ Diego Maatouk
 INSPIRATION:
 Risk of Rain (Gearbox) - Gameplay
 Balls (danidev) - Mechanics
-Legend of Zelda - Art Direction
-Rain World - Dynamic Music Interactions
+Legend of Zelda (Nintendo) - Art Direction
+Rain World (Videocult)- Dynamic Music Interactions
+In Stars And Time (insertdisk5) - Lore
 
-CODE SNIPPETS, SOME 3D MODELS: 
+CODE SNIPPETS
 GDquest
 
 3D MODELS: 
 SKETCHFAB
+GDquest
 
 SFX AND PARTICLES:
  Kenny.nl

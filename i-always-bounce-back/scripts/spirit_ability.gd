@@ -11,11 +11,12 @@ enum State { IDLE, CHARGING, FULLY_CHARGED, TRANSFORM_IN, FLYING, BOUNCING, AIR_
 
 @export_group("Charge")
 @export var charge_action := "charge"
-@export var max_charge_time := 3.0
-@export var min_charge_time := 0.2
 @export var miss_cooldown := 3.0
 @export var hit_cooldown := 1.0
 @export var charge_light_energy := 2.6
+@export var max_charge_time := 2.0
+@export var min_charge_time := 0.2
+
 
 @export_group("Launch")
 @export var min_launch_speed := 9.0

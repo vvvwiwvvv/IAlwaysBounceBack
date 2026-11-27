@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byr36pjyfgxmg"
-path="res://.godot/imported/upgradeicons4.png-3008a4eaaf6ca462e68563ca449471ee.ctex"
+uid="uid://d1vt08yqfb68y"
+path="res://.godot/imported/shop_metal3.png-5d130e8ec0de14cd34085b0c78cd49b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/shop/upgradeicons4.png"
-dest_files=["res://.godot/imported/upgradeicons4.png-3008a4eaaf6ca462e68563ca449471ee.ctex"]
+source_file="res://ui/shop_metal_open/shop_metal3.png"
+dest_files=["res://.godot/imported/shop_metal3.png-5d130e8ec0de14cd34085b0c78cd49b7.ctex"]
 
 [params]
 

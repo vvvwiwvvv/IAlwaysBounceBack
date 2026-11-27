@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://cd6i7cbriohry"]
+
+[ext_resource type="Texture2D" uid="uid://bgd8qpsr085d8" path="res://ui/metal_open/metal1.png" id="1_88jhc"]
+[ext_resource type="Texture2D" uid="uid://ddxsrk85xf158" path="res://ui/metal_open/metal2.png" id="2_hukjo"]
+[ext_resource type="Texture2D" uid="uid://d22t2vnpqqdhs" path="res://ui/metal_open/metal3.png" id="3_k60pj"]
+[ext_resource type="Texture2D" uid="uid://bgunsul8rhusr" path="res://ui/metal_open/metal4.png" id="4_e4fsc"]
+[ext_resource type="Texture2D" uid="uid://b2rby752t0yks" path="res://ui/metal_open/metal5.png" id="5_uav4x"]
+[ext_resource type="Texture2D" uid="uid://cwgt3ff3edibp" path="res://ui/metal_open/metal6.png" id="6_7xdvu"]
+[ext_resource type="Texture2D" uid="uid://gbfku3nsvako" path="res://ui/metal_open/metal7.png" id="7_jur5u"]
+[ext_resource type="Texture2D" uid="uid://kfm8ao0sodx3" path="res://ui/metal_open/metal8.png" id="8_i6nc8"]
+[ext_resource type="Texture2D" uid="uid://c6j3c8a7o5w2y" path="res://ui/metal_open/metal9.png" id="9_dm4we"]
+[ext_resource type="Texture2D" uid="uid://bsp4t30obu2qa" path="res://ui/metal_open/metal10.png" id="10_q8guq"]
+[ext_resource type="Texture2D" uid="uid://7jhkd2hl38ea" path="res://ui/metal_open/metal11.png" id="11_24nlh"]
+[ext_resource type="Texture2D" uid="uid://ccysovemkhm7b" path="res://ui/metal_open/metal12.png" id="12_f5cu4"]
+[ext_resource type="Script" uid="uid://bvfgloanuaids" path="res://ui/shop/chestpanel.gd" id="13_88jhc"]
+[ext_resource type="Texture2D" uid="uid://be7vm0p1krxyw" path="res://ui/shop/style.png" id="17_k3mro"]
+[ext_resource type="AudioStream" uid="uid://w1260nq2tihn" path="res://audio/shop_open.ogg" id="18_ibjs6"]
+[ext_resource type="Texture2D" uid="uid://e106iv4qxto" path="res://ui/evilButtonPress.png" id="19_xe1hr"]
+[ext_resource type="Texture2D" uid="uid://bsuigwc6h7ctx" path="res://ui/evilButton.png" id="20_88jhc"]
+[ext_resource type="Texture2D" uid="uid://c2tt5na15o0mj" path="res://ui/evilButtonHover.png" id="20_wfuet"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wq7lk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_88jhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hukjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k60pj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e4fsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_uav4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7xdvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jur5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_i6nc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dm4we")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_q8guq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_24nlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f5cu4")
+}],
+"loop": 0,
+"name": &"open",
+"speed": 12.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4rx4"]
+line_spacing = -15.18
+font_size = 40
+font_color = Color(0.898948, 0.93994534, 0.939824, 1)
+outline_size = 5
+outline_color = Color(0.05469197, 0.114271306, 0.18543756, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kxssg"]
+line_spacing = -6.0
+font_size = 22
+font_color = Color(0.898948, 0.93994534, 0.939824, 1)
+outline_size = 5
+outline_color = Color(0.05469197, 0.114271306, 0.18543756, 1)
+
+[sub_resource type="LabelSettings" id="button_text"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0.08707369, 0.23574752, 0.29792252, 1)
+
+[node name="Panel" type="AnimatedSprite2D" unique_id=53891178]
+texture_filter = 1
+scale = Vector2(2.4465127, 2.4465127)
+sprite_frames = SubResource("SpriteFrames_wq7lk")
+animation = &"open"
+centered = false
+script = ExtResource("13_88jhc")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=504954967]
+offset_left = 36.378307
+offset_top = 6.5399213
+offset_right = 76.37831
+offset_bottom = 46.53992
+scale = Vector2(0.9360046, 0.9360046)
+texture = ExtResource("17_k3mro")
+
+[node name="Name" type="Label" parent="." unique_id=1448044638]
+offset_left = 24.115961
+offset_top = 41.283253
+offset_right = 201.11597
+offset_bottom = 96.28325
+scale = Vector2(0.34993058, 0.34993058)
+theme_override_colors/font_color = Color(0.15, 0.08, 0.02, 1)
+theme_override_font_sizes/font_size = 24
+text = "effervescencefdsf
+fdfd fsd sd "
+label_settings = SubResource("LabelSettings_g4rx4")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Desc" type="Label" parent="." unique_id=1140599216]
+offset_left = 18.80227
+offset_top = 59.676785
+offset_right = 226.80228
+offset_bottom = 83.67679
+scale = Vector2(0.3499306, 0.3499306)
+theme_override_colors/font_color = Color(0.15, 0.08, 0.02, 1)
+theme_override_font_sizes/font_size = 20
+text = "low hp but ludicrous damage adjnsakdna jsakndkanddsadasdasdsa"
+label_settings = SubResource("LabelSettings_kxssg")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Rarity" type="Label" parent="." unique_id=2035252664]
+offset_left = 24.11596
+offset_top = 80.52277
+offset_right = 201.11597
+offset_bottom = 115.52277
+scale = Vector2(0.3499306, 0.3499306)
+theme_override_colors/font_color = Color(0.45, 0.1, 0.02, 1)
+theme_override_font_sizes/font_size = 20
+text = "LEGENDARY"
+label_settings = SubResource("LabelSettings_g4rx4")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="." unique_id=1755773547]
+texture_filter = 1
+offset_left = 27.385921
+offset_top = 96.05509
+offset_right = 138.38593
+offset_bottom = 147.05508
+scale = Vector2(0.49027368, 0.49027368)
+texture_normal = ExtResource("20_88jhc")
+texture_pressed = ExtResource("19_xe1hr")
+texture_hover = ExtResource("20_wfuet")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Button" unique_id=1478138501]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SELECT"
+label_settings = SubResource("button_text")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=573182014]
+stream = ExtResource("18_ibjs6")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

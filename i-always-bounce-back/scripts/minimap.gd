@@ -16,5 +16,8 @@ func _draw() -> void:
 		var p = c+Vector2(e.global_position.x - player.global_position.x, e.global_position.z - player.global_position.z).rotated(rig.yaw)*r/30
 		if (p-c).length() > r:
 			p = c+(p-c).normalized()*r
-		draw_texture(dot, p - dot.get_size() * 0.5)
+		if e.kind == 3: #or boss cheking logic idk AZAAAAAAAAAAAAAAAAAAAN
+			draw_texture(boss_dot, p - dot.get_size() * 0.5)
+		else:
+			draw_texture(dot, p - dot.get_size() * 0.5)
 	draw_circle(c, 1.0, Color("7777ff"))
