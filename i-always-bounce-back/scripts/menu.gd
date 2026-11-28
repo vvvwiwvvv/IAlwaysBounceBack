@@ -3,18 +3,20 @@ extends Control
 const MUSIC := "res://audio/forest2.mp3"
 @onready var rect = $ColorRect
 @onready var rect2 = $ColorRect2
-@onready var hover = $hoverBtn
+@onready var hover = $hover
 @onready var start = $startBtn
 @onready var credits = $creditsBtn
 @onready var quit = $quitBtn
+@onready var info = $helpBtn
+@onready var icon = $icon
 @onready var p1 = start.position
 @onready var p2 = credits.position
 @onready var p3 = quit.position
+@onready var p4 = info.position
 @onready var creditplayer = $creditsAnim
 @onready var titleplayer = $titleAnim
 @onready var help = $credithelper
-@onready var info = $helpBtn
-@onready var icon = $icon
+
 var incredits = 0
 
 func _ready() -> void:
@@ -60,10 +62,12 @@ func btn_hover(btn: TextureButton, target: Vector2, duration: float = 1.0) -> vo
 	var pospp
 	if btn == start:
 		pospp = p1 + target
-	if btn == quit:
+	elif btn == quit:
 		pospp = p3 + target
-	if btn == credits:
+	elif btn == credits:
 		pospp = p2 + target
+	else:
+		pospp = p4 + target
 	t2 = create_tween()
 	t2.set_trans(Tween.TRANS_SINE)
 	t2.set_ease(Tween.EASE_IN_OUT)
@@ -88,7 +92,7 @@ func fade(r: ColorRect, val:float = 1,duration: float = 1.0) -> void:
 	
 func _on_texture_button_pressed() -> void: #start
 	sound(s2)
-	glide_hover($hover, Vector2(415,160), 0.5)
+	glide_hover($icon, Vector2(415,160), 0.5)
 	await fade(rect,1,0.75)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
@@ -99,7 +103,7 @@ func _on_texture_button_2_pressed() -> void: #quit
 	await fade(rect2,1,0.75)
 	get_tree().quit()
 
-@onready var moveables: Array[Node]= [$startBtn,$quitBtn,$creditsBtn,$icon,$title,$hoverBtn]
+@onready var moveables: Array[Node]= [$startBtn,$quitBtn,$creditsBtn,$icon,$title,$hover,$Sprite2D,$helpBtn]
 func _on_texture_button_3_pressed() -> void: #credits
 	sound(s2)
 	creditplayer.play("move")
@@ -135,16 +139,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_start_btn_mouse_entered() -> void:
 	btn_hover(start,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(397, 319), 0.2)
+	glide_hover(hover, Vector2(1496, 1199), 0.2)
 
 
 func _on_quit_btn_mouse_entered() -> void:
 	btn_hover(quit,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(252, 575), 0.2)
+	glide_hover(hover, Vector2(1496, 1521), 0.2)
+	
 
 func _on_credits_btn_mouse_entered() -> void:
 	btn_hover(credits,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(330, 460), 0.2)
+	glide_hover(hover, Vector2(1496, 1413), 0.2)
 
 
 func _on_start_btn_mouse_exited() -> void:
@@ -179,7 +184,8 @@ func _on_help_btn_pressed() -> void:
 
 func _on_help_btn_mouse_entered() -> void:
 	btn_hover(info,Vector2(-10, -10), 0.2)
-	glide_hover(hover, Vector2(330, 460), 0.2)
+	
+	glide_hover(hover, Vector2(1496, 1306), 0.2)
 
 
 func _on_help_btn_mouse_exited() -> void:

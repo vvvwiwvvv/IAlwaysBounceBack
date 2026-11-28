@@ -746,9 +746,9 @@ anchor_top = 0.395
 anchor_right = 0.483
 anchor_bottom = 0.395
 offset_left = 939.584
-offset_top = 943.04
+offset_top = 1265.04
 offset_right = 979.584
-offset_bottom = 983.04
+offset_bottom = 1305.04
 
 [node name="hoverBtn2" type="AnimatedSprite2D" parent="hover" unique_id=1525545146]
 texture_filter = 1
