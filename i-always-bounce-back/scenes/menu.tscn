@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dng44q0qx8o0n" path="res://scripts/menu.gd" id="1_v86rl"]
 [ext_resource type="Texture2D" uid="uid://c7npnrm3m22ey" path="res://ui/menuButton.png" id="2_13sgg"]
+[ext_resource type="Texture2D" uid="uid://cscd4yp87h37h" path="res://ui/menuPanel.png" id="2_e1j7n"]
 [ext_resource type="Texture2D" uid="uid://ckw5wdy8ah758" path="res://ui/menuButtonPressed.png" id="2_g3eks"]
 [ext_resource type="Texture2D" uid="uid://c8sd21oa70nmy" path="res://ui/icon.png" id="2_mhnvy"]
 [ext_resource type="Texture2D" uid="uid://bxtitbg0dv4v1" path="res://ui/title.png" id="3_4ytvr"]
@@ -511,10 +512,10 @@ tracks/0/path = NodePath("creditsLabel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 28.766666),
-"transitions": PackedFloat32Array(1, 0.085377574),
+"times": PackedFloat32Array(0, 28.733334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(164, 645), Vector2(164, -899)]
+"values": [Vector2(164, 645), Vector2(164, -1247)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m63oq"]
@@ -582,15 +583,49 @@ grow_vertical = 2
 scale = Vector2(33.825108, 24.93379)
 color = Color(0, 0, 0, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1750001120]
+z_index = 1
+texture_filter = 1
+position = Vector2(556, 419)
+scale = Vector2(3.3058093, 3.3058093)
+texture = ExtResource("2_e1j7n")
+
+[node name="helpBtn" type="TextureButton" parent="." unique_id=1993697568]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 464.0
+offset_top = 324.0
+offset_right = 764.0
+offset_bottom = 491.00003
+scale = Vector2(0.605, 0.605)
+texture_normal = ExtResource("3_v86rl")
+texture_pressed = ExtResource("2_g3eks")
+texture_hover = ExtResource("2_13sgg")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="helpBtn" unique_id=1314764970]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.30200002
+anchor_bottom = 0.37100002
+offset_left = 95.86776
+offset_top = 42.975212
+offset_right = 145.26776
+offset_bottom = 94.0182
+text = "INFO"
+label_settings = SubResource("LabelSettings_wq7lk")
+
 [node name="startBtn" type="TextureButton" parent="." unique_id=1178371932]
 z_index = 1
 texture_filter = 1
 layout_mode = 0
-offset_left = 13.0
-offset_top = 248.0
-offset_right = 400.0
-offset_bottom = 415.0
-scale = Vector2(0.83571935, 0.83571935)
+offset_left = 465.0
+offset_top = 217.0
+offset_right = 765.0
+offset_bottom = 384.0
+scale = Vector2(0.605, 0.605)
 texture_normal = ExtResource("3_v86rl")
 texture_pressed = ExtResource("2_g3eks")
 texture_hover = ExtResource("2_13sgg")
@@ -602,10 +637,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.30200002
 anchor_bottom = 0.37100002
-offset_left = 111.64734
-offset_top = 53.59071
-offset_right = 134.77333
-offset_bottom = 104.63371
+offset_left = 77.68594
+offset_top = 41.32232
+offset_right = 127.08594
+offset_bottom = 92.365326
 text = "START"
 label_settings = SubResource("LabelSettings_wq7lk")
 
@@ -613,26 +648,26 @@ label_settings = SubResource("LabelSettings_wq7lk")
 z_index = 1
 texture_filter = 1
 layout_mode = 0
-offset_left = 13.0
-offset_top = 413.00003
-offset_right = 400.00003
-offset_bottom = 580.0
-scale = Vector2(0.6139012, 0.6139012)
+offset_left = 465.0
+offset_top = 431.0
+offset_right = 765.0
+offset_bottom = 598.0
+scale = Vector2(0.605, 0.605)
 texture_normal = ExtResource("3_v86rl")
 texture_pressed = ExtResource("2_g3eks")
 texture_hover = ExtResource("2_13sgg")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="creditsBtn" unique_id=1492735620]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.30200002
 anchor_bottom = 0.37100002
-offset_left = 111.0
-offset_top = 59.0
-offset_right = 170.12599
-offset_bottom = 110.043
+offset_left = 63.815475
+offset_top = 45.078712
+offset_right = 149.21547
+offset_bottom = 96.121704
 text = "CREDITS"
 label_settings = SubResource("LabelSettings_wq7lk")
 
@@ -640,16 +675,16 @@ label_settings = SubResource("LabelSettings_wq7lk")
 z_index = 1
 texture_filter = 1
 layout_mode = 0
-offset_left = 14.0
+offset_left = 466.0
 offset_top = 538.00006
-offset_right = 297.54446
+offset_right = 766.0
 offset_bottom = 660.35645
-scale = Vector2(0.6271879, 0.6271879)
+scale = Vector2(0.67825484, 0.67825484)
 texture_normal = ExtResource("3_v86rl")
 texture_pressed = ExtResource("2_g3eks")
 texture_hover = ExtResource("2_13sgg")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="quitBtn" unique_id=134784510]
 layout_mode = 1
@@ -681,7 +716,7 @@ texture_filter = 1
 layout_mode = 0
 offset_top = -5.0
 offset_right = 735.0
-offset_bottom = 71.00001
+offset_bottom = 71.000015
 scale = Vector2(1.6824596, 1.6716018)
 texture = ExtResource("3_4ytvr")
 expand_mode = 1
@@ -704,13 +739,33 @@ offset_bottom = 35.00003
 scale = Vector2(28.718868, 16.364082)
 mouse_filter = 2
 
-[node name="hoverBtn" type="AnimatedSprite2D" parent="." unique_id=584679494]
+[node name="hover" type="Control" parent="." unique_id=1395617879]
+layout_mode = 1
+anchor_left = 0.483
+anchor_top = 0.395
+anchor_right = 0.483
+anchor_bottom = 0.395
+offset_left = 939.584
+offset_top = 943.04
+offset_right = 979.584
+offset_bottom = 983.04
+
+[node name="hoverBtn2" type="AnimatedSprite2D" parent="hover" unique_id=1525545146]
 texture_filter = 1
-position = Vector2(397, 319)
+position = Vector2(-779, -944)
+scale = Vector2(2.763, 2.763)
+sprite_frames = SubResource("SpriteFrames_mqypj")
+autoplay = "default"
+frame_progress = 0.36785698
+
+[node name="hoverBtn" type="AnimatedSprite2D" parent="hover" unique_id=584679494]
+texture_filter = 1
+position = Vector2(-1101, -944)
 scale = Vector2(2.7626667, 2.7626667)
 sprite_frames = SubResource("SpriteFrames_mqypj")
 autoplay = "default"
 frame_progress = 0.36785698
+flip_h = true
 
 [node name="titleAnim" type="AnimationPlayer" parent="." unique_id=159952731]
 libraries/ = SubResource("AnimationLibrary_j2xhi")
@@ -780,6 +835,9 @@ lifetime = 1.64
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_mqypj")
 
+[connection signal="mouse_entered" from="helpBtn" to="." method="_on_help_btn_mouse_entered"]
+[connection signal="mouse_exited" from="helpBtn" to="." method="_on_help_btn_mouse_exited"]
+[connection signal="pressed" from="helpBtn" to="." method="_on_help_btn_pressed"]
 [connection signal="mouse_entered" from="startBtn" to="." method="_on_start_btn_mouse_entered"]
 [connection signal="mouse_exited" from="startBtn" to="." method="_on_start_btn_mouse_exited"]
 [connection signal="pressed" from="startBtn" to="." method="_on_texture_button_pressed"]

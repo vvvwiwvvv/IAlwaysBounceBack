@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b0bsp5sl3vps8"]
+
+[ext_resource type="PackedScene" uid="uid://bvkn1reydxl41" path="res://enemies/goblinBoss/spike_rock.glb" id="1_bpoff"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wmx41"]
+
+[node name="Node3D" type="Node3D" unique_id=517866573]
+
+[node name="Sketchfab_Scene" parent="." unique_id=498486435 instance=ExtResource("1_bpoff")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=5665038]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1187505871]
+transform = Transform3D(1.1683145, 0, 0, 0, 0.5970959, 0, 0, 0, 1.1695684, 0, 0.18824753, 0)
+shape = SubResource("SphereShape3D_wmx41")

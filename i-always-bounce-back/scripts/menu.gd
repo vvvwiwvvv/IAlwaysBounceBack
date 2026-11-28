@@ -1,18 +1,19 @@
 extends Control
 
 const MUSIC := "res://audio/forest2.mp3"
-@onready var rect: ColorRect = $ColorRect
-@onready var rect2: ColorRect = $ColorRect2
-@onready var hover: AnimatedSprite2D = $hoverBtn
-@onready var start: TextureButton = $startBtn
-@onready var credits: TextureButton = $creditsBtn
-@onready var quit: TextureButton = $quitBtn
+@onready var rect = $ColorRect
+@onready var rect2 = $ColorRect2
+@onready var hover = $hoverBtn
+@onready var start = $startBtn
+@onready var credits = $creditsBtn
+@onready var quit = $quitBtn
 @onready var p1 = start.position
 @onready var p2 = credits.position
 @onready var p3 = quit.position
 @onready var creditplayer = $creditsAnim
 @onready var titleplayer = $titleAnim
 @onready var help = $credithelper
+@onready var info = $helpBtn
 @onready var icon = $icon
 var incredits = 0
 
@@ -39,10 +40,10 @@ func _ready() -> void:
 
 func glide_to(obj,target: Vector2, duration: float = 1.0) -> void:
 	var t=create_tween()
-	var pos = obj.position + target
+	var posp = obj.position + target
 	t.set_trans(Tween.TRANS_SINE)
 	t.set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(obj, "position", pos, duration)
+	t.tween_property(obj, "position", posp, duration)
 	
 func glide_hover(obj,target: Vector2, duration: float = 1.0) -> void:
 	var t=create_tween()
@@ -56,21 +57,22 @@ func btn_hover(btn: TextureButton, target: Vector2, duration: float = 1.0) -> vo
 		return
 	if target.x < 0:
 		sound(s1)
-	var pos
+	var pospp
 	if btn == start:
-		pos = p1 + target
+		pospp = p1 + target
 	if btn == quit:
-		pos = p3 + target
+		pospp = p3 + target
 	if btn == credits:
-		pos = p2 + target
+		pospp = p2 + target
 	t2 = create_tween()
 	t2.set_trans(Tween.TRANS_SINE)
 	t2.set_ease(Tween.EASE_IN_OUT)
-	t2.tween_property(btn, "position", pos, duration)
+	t2.tween_property(btn, "position", pospp, duration)
 
 const s1 = preload("res://audio/hover.ogg")
 const s2 = preload("res://audio/confirm.ogg")
 const s3 = preload("res://audio/crack.mp3")
+const s4 = preload("res://audio/unhover.ogg")
 
 func sound(stream: AudioStream) -> void:
 	var player = AudioStreamPlayer.new()
@@ -86,7 +88,7 @@ func fade(r: ColorRect, val:float = 1,duration: float = 1.0) -> void:
 	
 func _on_texture_button_pressed() -> void: #start
 	sound(s2)
-	glide_hover($icon, Vector2(415,160), 0.5)
+	glide_hover($hover, Vector2(415,160), 0.5)
 	await fade(rect,1,0.75)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
@@ -147,14 +149,17 @@ func _on_credits_btn_mouse_entered() -> void:
 
 func _on_start_btn_mouse_exited() -> void:
 	btn_hover(start,Vector2(0, 0), 0.2)
+	sound(s4)
 
 
 func _on_quit_btn_mouse_exited() -> void:
 	btn_hover(quit,Vector2(0, 0), 0.2)
+	sound(s4)
 
 
 func _on_credits_btn_mouse_exited() -> void:
 	btn_hover(credits,Vector2(0, 0), 0.2)
+	sound(s4)
 
 
 @onready var pos = icon.position
@@ -166,5 +171,17 @@ func _on_icon_pressed() -> void:
 		await get_tree().create_timer(0.05).timeout
 	icon.position = pos
 	$GPUParticles2D.emitting = false
-	
-	
+
+
+func _on_help_btn_pressed() -> void:
+	sound(s2)
+
+
+func _on_help_btn_mouse_entered() -> void:
+	btn_hover(info,Vector2(-10, -10), 0.2)
+	glide_hover(hover, Vector2(330, 460), 0.2)
+
+
+func _on_help_btn_mouse_exited() -> void:
+	btn_hover(info,Vector2(0, 0), 0.2)
+	sound(s4)
