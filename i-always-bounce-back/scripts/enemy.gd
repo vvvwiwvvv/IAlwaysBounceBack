@@ -32,7 +32,7 @@ signal died(enemy: Node)
 var health := 20.0
 var dead := false
 var game: Node
-
+var frost = false
 var _attack_timer := 0.5
 var _hop_timer := 0.0
 var _hurt_timer := 0.0
@@ -141,6 +141,8 @@ func _die() -> void:
 	if randf() < 1:#0.05:
 		print()
 
+var flash_col = Color(1.0, 0.08, 0.05, 0.55)
+var frost_col = Color(0.024, 0.631, 0.929, 0.55)
 
 func _physics_process(delta: float) -> void:
 	_time += delta
@@ -149,9 +151,16 @@ func _physics_process(delta: float) -> void:
 		return
 	_hurt_timer -= delta
 	_attack_timer -= delta
+	
 	if _flash_timer > 0.0:
 		_flash_timer -= delta
-		_overlay.albedo_color.a = 0.55 if _flash_timer > 0.0 else 0.0
+		_overlay.albedo_color = flash_col
+	elif frost:
+		_overlay.albedo_color = frost_col
+	else:
+		_overlay.albedo_color.a = 0.0
+		
+			
 	if game == null:
 		return
 	var target: Vector3 = game.player_target()

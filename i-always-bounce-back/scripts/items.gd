@@ -12,10 +12,8 @@ func get_items(rarity=-1)->Array:
 #draw_mult, gravity_mult, restitution_mult, extra_dash, combo_mult, charge_power_mult, style_mult
 #one offs: shureikens,shield
 #effects, glass_cannon,chain_bolt,explode_bounce,shureikens,auto_bounce,trail_damage,overcharge,fire_debuff,ice_debuff
-
+#heal_on_hit
 #todo #parry kb stat
-
-#effects, glass_cannon,chain_bolt,explode_bounce,shureikens,auto_bounce,trail_damage,overcharge,fire_debuff,ice_debuff
 
 
 
@@ -160,7 +158,7 @@ var items: Array = [
 		"rarity": 0,
 		"icon": "res://ui/items/damdage.png",
 		"effect": "ice_debuff",
-		"effect_value": 3.0, #dps
+		"effect_value": 0.5, #speed mult
 	},
 	{
 		"id": "fire_debuff",
@@ -169,7 +167,7 @@ var items: Array = [
 		"rarity": 0,
 		"icon": "res://ui/items/damdage.png",
 		"effect": "fire_debuff",
-		"effect_value": 5.0, #dps
+		"effect_value": 1.0, #dps for 10 seconds
 	},
 	{
 		"id": "glass_cannon",
@@ -225,7 +223,7 @@ var items: Array = [
 		"rarity": 1,
 		"icon": "res://ui/items/damdage.png",
 		"effect": "explode_bounce",
-		"effect_value": 10.0,
+		"effect_value": 1,
 		
 	},	{	"id": "light_damage",
 		"name": "Light as a-",

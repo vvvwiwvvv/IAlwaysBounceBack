@@ -1,6 +1,6 @@
 extends Control
 
-const MUSIC := "res://audio/music.mp3"
+const MUSIC := "res://audio/forest2.mp3"
 @onready var rect: ColorRect = $ColorRect
 @onready var rect2: ColorRect = $ColorRect2
 @onready var hover: AnimatedSprite2D = $hoverBtn

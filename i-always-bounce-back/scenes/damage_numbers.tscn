@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dirchyb4b2xk5" path="res://scenes/damage_numbers.gd" id="1_bhj6t"]
 
 [node name="Label3D" type="Label3D" unique_id=1173358603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0703712, 0)
 pixel_size = 0.02
 billboard = 1
 modulate = Color(1, 0.5259072, 0.46041757, 1)

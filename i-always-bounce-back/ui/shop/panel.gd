@@ -26,6 +26,9 @@ func refresh() -> void:
 	else:
 		button.disabled = true
 		button.modulate = Color(1, 1, 1, 0.45)
+	if (sell==0 and game.glassed == true):
+		button.modulate = Color(1, 1, 1, 0.45)
+		button.disabled = true
 
 
 func _on_button_pressed() -> void:

@@ -28,7 +28,7 @@ func _on_inventory_toggled(open: bool) -> void:
 	visible = open
 	if open:
 		refresh()
-		tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(panel,"position", Vector2(131,20),0.3)
 		tween.tween_property(panel, "scale", Vector2(1.678,1.308), 0.3)
 		tween.tween_property(map,"position", Vector2(742,238),0.3)

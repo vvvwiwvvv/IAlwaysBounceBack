@@ -13,6 +13,7 @@ var camera
 func _ready() -> void:
 	width = light_hp.mesh.size.x
 	camera = get_viewport().get_camera_3d()
+	update()
 
 func _process(_delta: float) -> void: 
 	look_at(camera.global_position, Vector3.UP) 

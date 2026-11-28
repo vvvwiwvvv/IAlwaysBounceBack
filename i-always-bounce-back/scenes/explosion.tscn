@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://js44ckcxpjtg"]
+
+[ext_resource type="Texture2D" uid="uid://bfvxs3nvb0afi" path="res://ui/circle.png" id="1_17npe"]
+[ext_resource type="Script" uid="uid://dipw7avytmlpl" path="res://scripts/explosion.gd" id="1_nfeox"]
+
+[sub_resource type="Curve" id="Curve_nfeox"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9911504, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w1lnq"]
+curve = SubResource("Curve_nfeox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hjelu"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_max = 24.769999
+use_scale_3d = true
+scale_3d_min = Vector3(1, 1, 1)
+scale_3d_max = Vector3(1, 1, 1)
+scale_min = 0.0
+scale_max = 0.0
+scale_curve = SubResource("CurveTexture_w1lnq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q734j"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.8437323, 0.3780231, 0, 1)
+albedo_texture = ExtResource("1_17npe")
+billboard_mode = 1
+grow = true
+grow_amount = 2.541
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_66n6t"]
+material = SubResource("StandardMaterial3D_q734j")
+shape = 0
+section_segments = 100
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjw83"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.2159017, 0.21590173, 0.2159017, 1)
+billboard_mode = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_vtrhv"]
+material = SubResource("StandardMaterial3D_jjw83")
+radius = 2.471
+height = 3.481
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wq7lk"]
+radius = 2.269
+
+[node name="Explosion" type="Node3D" unique_id=1258567411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.7287884, 0)
+script = ExtResource("1_nfeox")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="." unique_id=301747869]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_hjelu")
+draw_pass_1 = SubResource("RibbonTrailMesh_66n6t")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1318486745]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+randomness = 0.7
+process_material = SubResource("ParticleProcessMaterial_hjelu")
+draw_pass_1 = SubResource("SphereMesh_vtrhv")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1470084634]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=881082273]
+shape = SubResource("SphereShape3D_wq7lk")

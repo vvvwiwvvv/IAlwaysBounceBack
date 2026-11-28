@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ffrlwvklyqqd"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7um38"]
+lifetime_randomness = 0.1
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 15.413
+initial_velocity_min = 1.8299999
+initial_velocity_max = 5.73
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8mir"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.99999994, 0.6468094, 0.3820845, 1)
+billboard_mode = 1
+grow_amount = 9.36
+
+[sub_resource type="QuadMesh" id="QuadMesh_duswt"]
+material = SubResource("StandardMaterial3D_n8mir")
+
+[node name="FireDebuff" type="GPUParticles3D" unique_id=1125830821]
+process_material = SubResource("ParticleProcessMaterial_7um38")
+draw_pass_1 = SubResource("QuadMesh_duswt")

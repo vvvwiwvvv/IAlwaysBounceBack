@@ -61,6 +61,7 @@ var _ability_min_launch_speed
 var _ability_max_launch_speed 
 var _ability_min_charge_time 
 var _ability_max_charge_time 
+var _ability_max_dashes 
 
 @export var base_max_dashes = 1
 var max_dashes = base_max_dashes
@@ -87,6 +88,7 @@ var shop_open := false
 var inventory_open:= false
 var chest_open := false 
 var in_intermission := false
+var glassed = false
 
 var _queue: Array[int] = []
 var _spawn_timer := 0.0
@@ -105,6 +107,17 @@ var _world: Node3D
 @onready var sfx_bat_death: AudioStreamPlayer = $SfxBatDeath
 @onready var sfx_slime_death: AudioStreamPlayer = $SfxSlimeDeath
 @onready var sfx_parry: AudioStreamPlayer = $SfxParry
+
+@onready var sfx_bounce = preload("res://audio/bounce.mp3")
+@onready var sfx_explode = preload("res://audio/explode.mp3")
+
+func sound(stream: AudioStream) -> void: #random pitch
+	var player = AudioStreamPlayer.new()
+	player.stream = stream
+	player.pitch_scale = randf_range(0.8, 1.2)
+	add_child(player)
+	player.finished.connect(player.queue_free) 
+	player.play()
 
 func unfade():
 	$HUD/ColorRect.visible = true
@@ -131,12 +144,14 @@ func _ready() -> void:
 	_ability_max_launch_speed = _ability.max_launch_speed
 	_ability_max_charge_time= _ability.max_charge_time
 	_ability_min_charge_time=_ability.min_charge_time
+	_ability_max_dashes = _ability.max_dashes 
 	
 	health = max_health
 	_ability.charge_started.connect(_on_charge_started)
 	_ability.charge_ended.connect(_on_charge_ended)
 	_ability.ball_bounced.connect(_on_ball_bounced)
 	_ability.ball_hit_enemy.connect(_on_ball_hit_enemy)
+	_ball.finished.connect(_on_ball_finished)
 	var stream := music.stream as AudioStreamMP3
 	if stream:
 		stream.loop = true
@@ -227,7 +242,7 @@ func _apply_stats() -> void:
 	_ball.max_bounces = _ball_base_bounces+ stats.get("bounces",0)
 	_ball.gravity =_ball_base_gravity * stats.get("gravity_mult",1)
 	_ball.restitution =_ball_base_restitution * stats.get("restitution_mult",1)
-	
+	_ability.max_dashes = _ability_max_dashes + stats.get("extra_dash",0)
 	_ability.miss_cooldown = _ability_miss_cooldown * stats.get("cooldown_mult",1)
 	_ability.hit_cooldown = _ability_hit_cooldown* stats.get("cooldown_mult",1)
 	_ability.max_charge_time = _ability_max_charge_time* stats.get("draw_mult",1)
@@ -424,12 +439,14 @@ func _on_charge_ended() -> void:
 
 
 func _on_ball_bounced() -> void:
-	sfx_land.play()
+	sound(sfx_bounce)
 
 
 func _on_ball_hit_enemy(_killed: bool) -> void:
+	sound(sfx_bounce)
+	
+func _on_ball_finished()->void:
 	sfx_land.play()
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if over:
@@ -439,7 +456,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			set_shop_open(not shop_open)
 		elif event.physical_keycode == KEY_ESCAPE and shop_open:
 			set_shop_open(false)
-			
+		if event.physical_keycode == KEY_Q: 
+			q_action()
 		if event.physical_keycode == KEY_I: #temp -------------------------------------------------------------
 			set_chest_open(not chest_open,0)
 		if event.physical_keycode == KEY_O: #temp -------------------------------------------------------------
@@ -453,7 +471,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			damage_player(10,null)
 	if event.is_action_pressed("inventory"):
 		set_inventory_open(not inventory_open)
-
+func q_action()->void:
+	pass
 func set_chest_open(open: bool,rarity:int)->void:
 	if open != chest_open:
 		chest_open = open

@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 	var fill := charge_bar.get_theme_stylebox("fill") as StyleBoxFlat
 	if fill:
 		fill.bg_color = low_charge_color.lerp(full_charge_color, level)
-	hint.visible = _ability.relaunch_ready and _ability.is_ball() and not _ability.is_charging()
+	hint.visible = _ability.dashes_left > 0 and _ability.is_ball() and not _ability.is_charging()
 	_hurt = maxf(_hurt - hurt_fade * real, 0.0)
 	hurt_rect.color.a = _hurt * 0.45
 	if _fading:

@@ -53,9 +53,9 @@ var locked_level := 0.0
 var force_multiplier := 1.0
 var damage := 10.0
 var cooldown_left := 0.0
-var relaunch_ready := false
 var kills_this_flight := 0
-
+var max_dashes = 1
+var dashes_left = max_dashes #dont ask why the name for dash/charge/ability/spirit/ball is so inconsistent
 var _player: CharacterBody3D
 var _rig: Node3D
 var _chargers: Array[Node] = []
@@ -183,6 +183,7 @@ func _physics_process(delta: float) -> void:
 func _tick_idle() -> void:
 	if cooldown_left > 0.0 or _player.control_locked:
 		return
+	dashes_left = max_dashes
 	if Input.is_action_just_pressed(charge_action):
 		_begin_charge()
 
@@ -263,7 +264,7 @@ func _begin_transform_in() -> void:
 	_player.control_locked = true
 	_player.velocity = Vector3.ZERO
 	kills_this_flight = 0
-	relaunch_ready = false
+	dashes_left = max(dashes_left-1,0) #so no negative, thought idk if it makes a diff
 	ball.damage = damage
 	ball.prepare(launch_origin(), locked_level)
 	_play_transform_effects(launch_origin())
@@ -313,12 +314,12 @@ func _tick_flying(real: float) -> void:
 		_bounce_state_timer -= real
 		if _bounce_state_timer <= 0.0:
 			_set_state(State.FLYING)
-	if relaunch_ready and Input.is_action_just_pressed(charge_action):
+	if dashes_left > 0 and Input.is_action_just_pressed(charge_action):
 		_begin_air_charge()
 
 
 func _begin_air_charge() -> void:
-	relaunch_ready = false
+	dashes_left = max(dashes_left-1,0)
 	charge = 0.0
 	level = 0.0
 	ball.hover()
@@ -348,9 +349,9 @@ func _on_ball_bounced(_count: int, _point: Vector3, _normal: Vector3) -> void:
 
 
 func _on_ball_enemy_hit(_enemy: Node, killed: bool) -> void:
+	dashes_left = max_dashes
 	if killed:
 		kills_this_flight += 1
-		relaunch_ready = true
 	ball_hit_enemy.emit(killed)
 
 
@@ -361,7 +362,6 @@ func _on_ball_finished() -> void:
 
 func _begin_transform_out() -> void:
 	_follow_ball()
-	relaunch_ready = false
 	var travel := Vector3(ball.velocity.x, 0.0, ball.velocity.z)
 	if travel.length() > 0.2:
 		_player.set_facing_direction(travel)
@@ -396,6 +396,7 @@ func _restore_player() -> void:
 
 
 func _finish() -> void:
+	dashes_left = max_dashes
 	ball.deactivate()
 	_restore_player()
 	cooldown_left = hit_cooldown if kills_this_flight > 0 else miss_cooldown
@@ -408,7 +409,6 @@ func cancel() -> void:
 	_stop_charge_effects()
 	charge = 0.0
 	level = 0.0
-	relaunch_ready = false
 	ball.deactivate()
 	_restore_player()
 	_world_speed = 1.0

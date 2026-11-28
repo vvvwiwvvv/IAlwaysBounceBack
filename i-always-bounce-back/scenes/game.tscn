@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/goblin.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bat.tscn" id="4"]
-[ext_resource type="AudioStream" uid="uid://b4cg6c3prwxt2" path="res://audio/music.mp3" id="5"]
+[ext_resource type="AudioStream" uid="uid://c5ta128fapwl1" path="res://audio/forest1.mp3" id="5_8ool0"]
 [ext_resource type="AudioStream" uid="uid://b7nlko7ud3ej4" path="res://audio/player_charging.mp3" id="6"]
 [ext_resource type="AudioStream" uid="uid://cu6dqgygwasew" path="res://audio/player_landing.mp3" id="7"]
 [ext_resource type="AudioStream" uid="uid://qsu4u8y8nk5w" path="res://audio/player_damage.mp3" id="8"]
+[ext_resource type="AudioStream" uid="uid://bnsasf5u80oug" path="res://audio/bounce.mp3" id="8_8ool0"]
 [ext_resource type="AudioStream" uid="uid://d3aonvf306cba" path="res://audio/goblin_attack.mp3" id="9"]
 [ext_resource type="AudioStream" uid="uid://07ta866kc5ij" path="res://audio/goblin_death.mp3" id="10"]
 [ext_resource type="AudioStream" uid="uid://dxj8g0rxihxkd" path="res://audio/bat_death.mp3" id="11"]
@@ -38,8 +39,10 @@
 [ext_resource type="Texture2D" uid="uid://cyn75p8njcn3o" path="res://ui/overBtnPressed.png" id="34_twgab"]
 [ext_resource type="Texture2D" uid="uid://bdvcoefunro1p" path="res://ui/overBtnHover.png" id="35_02fa5"]
 [ext_resource type="Texture2D" uid="uid://cxni776rn2k35" path="res://ui/hand.png" id="36_nepv3"]
+[ext_resource type="PackedScene" uid="uid://ffrlwvklyqqd" path="res://scenes/fire_debuff.tscn" id="40_05nbr"]
 [ext_resource type="PackedScene" uid="uid://qbgr2fle3jx2" path="res://scenes/enemy_bar.tscn" id="40_8ool0"]
 [ext_resource type="PackedScene" uid="uid://btgth1wtctld5" path="res://scenes/damage_numbers.tscn" id="40_m4url"]
+[ext_resource type="PackedScene" uid="uid://js44ckcxpjtg" path="res://scenes/explosion.tscn" id="42_pr1ej"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twgab"]
 shader = ExtResource("17_gxtfn")
@@ -113,9 +116,10 @@ script = ExtResource("1")
 slime_scene = ExtResource("2")
 goblin_scene = ExtResource("3")
 bat_scene = ExtResource("4")
+base_damage = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1994123199]
-stream = ExtResource("5")
+stream = ExtResource("5_8ool0")
 volume_db = -14.0
 
 [node name="SfxCharge" type="AudioStreamPlayer" parent="." unique_id=1611497788]
@@ -126,6 +130,10 @@ volume_db = -6.0
 stream = ExtResource("7")
 volume_db = -4.0
 max_polyphony = 3
+
+[node name="SfxBounce" type="AudioStreamPlayer" parent="." unique_id=800669825]
+stream = ExtResource("8_8ool0")
+volume_db = -8.157
 
 [node name="SfxDamage" type="AudioStreamPlayer" parent="." unique_id=1480902606]
 stream = ExtResource("8")
@@ -930,10 +938,14 @@ color = Color(0, 0, 0, 1)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameOver" unique_id=1126332426]
 volume_db = -80.0
 
+[node name="FireDebuff" parent="." unique_id=1125830821 instance=ExtResource("40_05nbr")]
+
 [node name="Label3D" parent="." unique_id=1173358603 instance=ExtResource("40_m4url")]
 
 [node name="EnemyBar" parent="." unique_id=305463516 instance=ExtResource("40_8ool0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7980506, 0)
+
+[node name="Explosion" parent="." unique_id=1258567411 instance=ExtResource("42_pr1ej")]
 
 [connection signal="pressed" from="GameOver/Root/startagain" to="GameOver" method="_on_startagain_pressed"]
 [connection signal="pressed" from="GameOver/Root/giveup" to="GameOver" method="_on_giveup_pressed"]
