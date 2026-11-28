@@ -1,4 +1,3 @@
-
 extends Node
 
 signal style_popup(text:String)
@@ -355,6 +354,10 @@ func _spawn(kind: int) -> void:
 	enemy.global_position = _spawn_point(enemy.flying)
 	enemy.scale_for_wave(wave)
 	enemy.died.connect(_on_enemy_died)
+	if enemy.has_signal("SummonBats"):
+		enemy.SummonBats.connect(SpawnBats)
+	if enemy.has_signal("Stomps"):
+		enemy.Stomps.connect(SpawnRocks)
 	alive += 1
 	enemies_changed.emit(_queue.size() + alive)
 
@@ -531,3 +534,45 @@ func _return_to_menu() -> void:
 	Engine.physics_ticks_per_second = 60
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file(menu_scene)
+
+
+var rock_scene = preload("res://scenes/Rock.tscn")
+
+func SpawnBats() -> void:
+	var PlayerPos = player_target()
+	for i in 5:
+		var angle: float = TAU * i / 5
+		var spot = PlayerPos + Vector3(cos(angle) * 6.0, 3.0, sin(angle) * 6.0)
+		var bat = bat_scene.instantiate()
+		bat.game = self
+		_world.add_child(bat)
+		bat.global_position = spot
+		bat.died.connect(_on_enemy_died)
+		alive += 1
+	enemies_changed.emit(_queue.size() + alive)
+
+
+func SpawnRocks(Position: Vector3) -> void:
+	var PlayerPos = player_target()
+	var direction = Vector3(PlayerPos.x - Position.x, 0.0, PlayerPos.z - Position.z).normalized()
+	for i in 6:
+		var spot = Position + direction * (2.0 + i * 1.5)
+		SpawnOneRock(spot)
+		await get_tree().create_timer(0.15).timeout
+
+func SpawnOneRock(spot: Vector3) -> void:
+	var rock = rock_scene.instantiate()
+	_world.add_child(rock)
+	rock.global_position = spot + Vector3(0.0, -2.0, 0.0)
+
+	var tween = create_tween()
+	tween.tween_property(rock, "global_position", spot, 0.15)
+	tween.tween_interval(0.8)
+	tween.tween_property(rock, "global_position", spot + Vector3(0.0, -2.0, 0.0), 0.4)
+	tween.tween_callback(rock.queue_free)
+
+	await get_tree().create_timer(0.15).timeout
+	var PlayerPos = player_target()
+	var distance = Vector2(PlayerPos.x - spot.x, PlayerPos.z - spot.z).length()
+	if distance < 1.2:
+		damage_player(15.0, null)
