@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d22tv5s05pynr"]
+
+[ext_resource type="Script" uid="uid://d1h60bs4vfvsv" path="res://scripts/EnemyScripts/goblinboss.gd" id="1_t4q3l"]
+
+[node name="GoblinBoss" type="CharacterBody3D" unique_id=1145044327]
+script = ExtResource("1_t4q3l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=530981561]
+
+[node name="Model" type="Node3D" parent="." unique_id=383638170]

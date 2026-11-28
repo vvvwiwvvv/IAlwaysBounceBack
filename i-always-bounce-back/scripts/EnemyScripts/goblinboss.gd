@@ -124,7 +124,7 @@ func Stomp() -> void:
 
 func Summon() -> void:
 	print("summon")
-	#pee walk
+	#end walk
 	#poop summon
 	SummonBats.emit()
 	Rest()
@@ -137,5 +137,3 @@ func Spin() -> void:
 	move_speed = SpinSpeed
 	damage = SpinDamage
 	attack_cooldown = 0.5
-	#pee walk
-	#poop spin
