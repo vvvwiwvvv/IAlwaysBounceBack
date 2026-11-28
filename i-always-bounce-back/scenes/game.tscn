@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://cyn75p8njcn3o" path="res://ui/overBtnPressed.png" id="34_twgab"]
 [ext_resource type="Texture2D" uid="uid://bdvcoefunro1p" path="res://ui/overBtnHover.png" id="35_02fa5"]
 [ext_resource type="Texture2D" uid="uid://cxni776rn2k35" path="res://ui/hand.png" id="36_nepv3"]
+[ext_resource type="PackedScene" uid="uid://qbgr2fle3jx2" path="res://scenes/enemy_bar.tscn" id="40_8ool0"]
 [ext_resource type="PackedScene" uid="uid://btgth1wtctld5" path="res://scenes/damage_numbers.tscn" id="40_m4url"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twgab"]
@@ -930,6 +931,9 @@ color = Color(0, 0, 0, 1)
 volume_db = -80.0
 
 [node name="Label3D" parent="." unique_id=1173358603 instance=ExtResource("40_m4url")]
+
+[node name="EnemyBar" parent="." unique_id=305463516 instance=ExtResource("40_8ool0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7980506, 0)
 
 [connection signal="pressed" from="GameOver/Root/startagain" to="GameOver" method="_on_startagain_pressed"]
 [connection signal="pressed" from="GameOver/Root/giveup" to="GameOver" method="_on_giveup_pressed"]

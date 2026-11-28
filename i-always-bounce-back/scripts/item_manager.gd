@@ -32,7 +32,7 @@ func accumulate_stat(item: Dictionary) -> void:
 			stats[stat] = stats.get(stat,1)*item[stat]
 			print(stats) 
 	
-
+							   
 func apply_effects(item: Dictionary) -> void:
 	if item.has("effect"):
 		match item.effect:

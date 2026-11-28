@@ -48,8 +48,8 @@ var _meshes: Array[MeshInstance3D] = []
 var _animation: AnimationPlayer
 
 @onready var model: Node3D = $Model
-
-
+const _hp_bar=preload("res://scenes/enemy_bar.tscn")
+var hp_bar
 func _ready() -> void:
 	add_to_group("enemies")
 	collision_layer = 2
@@ -81,6 +81,10 @@ func _ready() -> void:
 		_play_loop()
 	_time = randf() * 10.0
 	_hop_timer = randf() * hop_interval
+	
+	hp_bar = _hp_bar.instantiate()
+	add_child(hp_bar)
+	hp_bar.move(self,1.5) #change depending on mob?
 
 
 func _play_loop() -> void:
@@ -111,6 +115,7 @@ func take_hit(amount: float, impulse: Vector3, force: float = 5) -> bool: #added
 	_flash_timer = 0.15
 	health -= amount
 	game.damage_numbers(self,amount)
+	hp_bar.update()
 	
 	var push := Vector3(impulse.x, 0.0, impulse.z)
 	if push.length() > 0.1:

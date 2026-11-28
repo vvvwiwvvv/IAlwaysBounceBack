@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://qbgr2fle3jx2"]
+
+[ext_resource type="Script" uid="uid://40hp0v71ld6t" path="res://scripts/enemy_bar.gd" id="1_gw56w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4url"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.347661e-06, 0.5703421, 0.40068406, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8ool0"]
+material = SubResource("StandardMaterial3D_m4url")
+size = Vector2(0.98, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7025r"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.4288817e-07, 0.1060733, 0.080101795, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_wq7lk"]
+material = SubResource("StandardMaterial3D_7025r")
+size = Vector2(1, 0.1)
+
+[node name="EnemyBar" type="Node3D" unique_id=305463516]
+script = ExtResource("1_gw56w")
+
+[node name="hp" type="Label3D" parent="." unique_id=1841834074]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10037756, 0)
+billboard = 1
+text = "0"
+
+[node name="lighthp" type="MeshInstance3D" parent="." unique_id=518050383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.009543717, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_8ool0")
+
+[node name="darkhp" type="MeshInstance3D" parent="." unique_id=1301878752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015590429, -0.024265736)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_wq7lk")
